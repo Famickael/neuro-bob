@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 470" role="img" aria-labelledby="title desc">
+  <title id="title">Neuro Bob+ souriant</title><desc id="desc">Petit robot blanc et bleu, yeux lumineux turquoise, qui fait coucou.</desc>
+  <defs>
+    <linearGradient id="shell" x1=".04" y1=".06" x2=".91" y2=".98" gradientUnits="objectBoundingBox"><stop stop-color="#fff"/><stop offset=".5" stop-color="#f7f9ff"/><stop offset="1" stop-color="#bacff5"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".7" stop-color="#d5e4ff"/><stop offset="1" stop-color="#a0bcee"/></linearGradient>
+    <linearGradient id="face" x1=".1" y1=".04" x2=".85" y2=".95"><stop stop-color="#203960"/><stop offset=".53" stop-color="#0d1d3c"/><stop offset="1" stop-color="#070f27"/></linearGradient>
+    <linearGradient id="ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf7ff"/><stop offset=".5" stop-color="#5fa2ff"/><stop offset="1" stop-color="#345fd8"/></linearGradient>
+    <radialGradient id="bodyshine"><stop stop-color="#fff"/><stop offset=".72" stop-color="#f9fcff"/><stop offset="1" stop-color="#c7d9f8"/></radialGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="160%" height="170%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="2" dy="9" stdDeviation="12" flood-color="#193b88" flood-opacity=".22"/></filter>
+  </defs>
+  <ellipse cx="265" cy="439" rx="145" ry="17" fill="#264c9a" opacity=".16" filter="url(#shadow)"/>
+  <g filter="url(#soft)">
+    <!-- Left arm raised in a welcoming wave -->
+    <path d="M158 295C120 284 100 251 87 214" fill="none" stroke="#243e75" stroke-width="36" stroke-linecap="round"/>
+    <path d="M158 291C126 282 113 257 102 234" fill="none" stroke="#f2f7ff" stroke-width="25" stroke-linecap="round"/>
+    <path d="M90 226C76 228 59 218 54 208c-3-7 3-12 10-11l17 6c-16-10-25-22-21-28 4-7 11-7 18-1l16 15c-10-18-12-30-5-34 7-4 14 1 19 11l8 17c-3-21-2-31 6-32 7-1 12 6 13 17l4 23c12-6 19-5 21 4 3 12-18 27-27 35-12 11-22 12-43-4Z" fill="#1b2d56" stroke="#304872" stroke-width="3"/>
+    <path d="M82 178q-5-7-8-8M99 165l-3-7M119 171l1-7" stroke="#6b8acc" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+    <!-- right arm -->
+    <path d="M365 297Q404 309 413 342" fill="none" stroke="#284173" stroke-width="36" stroke-linecap="round"/>
+    <path d="M369 295Q401 311 407 337" fill="none" stroke="url(#shell)" stroke-width="25" stroke-linecap="round"/>
+    <path d="M407 330c15-6 25 3 27 17 3 16-11 28-25 27-12-1-20-12-19-23 1-9 6-16 17-21Z" fill="#202f55"/>
+    <!-- legs -->
+    <path d="M232 377v47" stroke="#24385d" stroke-width="41" stroke-linecap="round"/>
+    <path d="M310 377v47" stroke="#24385d" stroke-width="41" stroke-linecap="round"/>
+    <path d="M232 380v32" stroke="url(#shell)" stroke-width="29" stroke-linecap="round"/>
+    <path d="M310 380v32" stroke="url(#shell)" stroke-width="29" stroke-linecap="round"/>
+    <ellipse cx="225" cy="429" rx="30" ry="16" fill="#24385e"/>
+    <ellipse cx="317" cy="429" rx="30" ry="16" fill="#24385e"/>
+    <!-- torso -->
+    <path d="M188 273c18-17 49-19 79-18h25c42 0 65 14 76 40l13 72c5 30-15 45-44 47H216c-30-2-50-16-44-46l13-68Z" fill="url(#bodyshine)" stroke="#d0def8" stroke-width="4"/>
+    <path d="M204 276c42-20 102-19 145 0" fill="none" stroke="#fff" stroke-width="8" opacity=".7"/>
+    <rect x="243" y="254" width="57" height="18" rx="9" fill="#17305d"/>
+    <!-- brain logo -->
+    <g transform="translate(250 322)" stroke="#477bf4" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M15 2C3-1-2 8 1 17c-10 3-10 17-1 20-3 9 5 18 15 15 4 7 15 7 19 0 10 3 18-6 15-15 9-3 9-17-1-20 4-9-4-18-15-15-6-7-14-7-18 0Z"/>
+      <path d="M24 4v46M12 13q-9 4-2 13M15 36q-7-5-11 0M35 13q9 4 2 13M32 36q7-5 11 0M12 27q9 0 12 7M35 26q-8 1-11 8"/>
+      <path d="M12 46h24"/>
+    </g>
+    <!-- head side components -->
+    <rect x="131" y="112" width="49" height="106" rx="24" fill="#d3e2ff"/>
+    <rect x="351" y="112" width="49" height="106" rx="24" fill="#cedeff"/>
+    <ellipse cx="151" cy="165" rx="32" ry="48" fill="url(#ear)" stroke="#e9f4ff" stroke-width="7"/>
+    <ellipse cx="378" cy="165" rx="31" ry="48" fill="url(#ear)" stroke="#e6f2ff" stroke-width="7"/>
+    <ellipse cx="150" cy="165" rx="14" ry="29" fill="#76b5ff" opacity=".65"/>
+    <ellipse cx="379" cy="165" rx="12" ry="29" fill="#76b5ff" opacity=".67"/>
+    <!-- head shell -->
+    <rect x="156" y="59" width="220" height="210" rx="91" fill="url(#rim)" stroke="#f9fcff" stroke-width="8"/>
+    <path d="M185 97c36-33 118-42 155-7" fill="none" stroke="#fff" stroke-width="11" opacity=".65" stroke-linecap="round"/>
+    <!-- dark screen -->
+    <rect x="178" y="89" width="176" height="146" rx="63" fill="url(#face)" stroke="#a8c5f3" stroke-width="5"/>
+    <ellipse cx="257" cy="103" rx="64" ry="10" fill="#809edb" opacity=".13"/>
+    <!-- glowing eyes -->
+    <path d="M203 171c1-26 34-27 39 0M282 171c4-27 37-25 41 0" stroke="#63f4fa" stroke-width="19" stroke-linecap="round" fill="none" opacity=".52" filter="url(#glow)"/>
+    <path d="M203 171c1-26 34-27 39 0M282 171c4-27 37-25 41 0" stroke="#76fcff" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <!-- subtle cheek lights -->
+    <ellipse cx="201" cy="197" rx="11" ry="5" fill="#3899d7" opacity=".16"/>
+    <ellipse cx="324" cy="197" rx="11" ry="5" fill="#3899d7" opacity=".16"/>
+  </g>
+  <!-- yellow rays -->
+  <g fill="none" stroke="#ffcf21" stroke-width="10" stroke-linecap="round">
+    <path d="M385 68l11-23M406 91l24-14M377 42l3-22"/>
+  </g>
+  <circle cx="112" cy="91" r="6" fill="#ffda32" opacity=".9"/>
+  <path d="M419 251l9-8m-1 26 12-1" stroke="#76ce9c" stroke-width="5" stroke-linecap="round"/>
+</svg>
