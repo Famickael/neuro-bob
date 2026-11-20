@@ -162,7 +162,7 @@ function makeMessage(role, text, simulated = false) {
       listen.className="listen-button";
       listen.type="button";
       listen.setAttribute("aria-label","Écouter la réponse");
-      const icon=document.createElement("svg"); const use=document.createElementNS("http://www.w3.org/2000/svg","use");
+      const icon=document.createElementNS("http://www.w3.org/2000/svg","svg"); const use=document.createElementNS("http://www.w3.org/2000/svg","use");
       use.setAttribute("href","#i-volume"); icon.append(use); listen.append(icon,document.createTextNode(" Écouter"));
       listen.addEventListener("click",()=>speak(text));
       meta.append(listen);
