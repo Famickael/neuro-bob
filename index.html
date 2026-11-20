@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#213e84">
+  <meta name="description" content="Neuro Bob+ : comprendre les fonctionnements neurotypiques et neuroatypiques, explorer des situations concrètes et dialoguer sans jugement.">
+  <title>Neuro Bob+ — Mieux se comprendre</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.3a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-3-.7l-4.8 1.5L4.7 16A8.4 8.4 0 1 1 20 11.3Z"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.7 8.3-2 5.4-5.4 2 2-5.4z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6a9 9 0 0 0-9-2v15a9 9 0 0 1 9 2 9 9 0 0 1 9-2V4a9 9 0 0 0-9 2Zm0 0v15"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10.5V16m0-8v.2"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10.6 2.8h2.8l.6 2.3 1.6.7 2-.9 2 2-1 2 .7 1.6 2.3.6v2.8l-2.3.6-.7 1.6 1 2-2 2-2-.9-1.6.7-.6 2.3h-2.8l-.6-2.3-1.6-.7-2 .9-2-2 1-2-.7-1.6-2.3-.6v-2.8l2.3-.6.7-1.6-1-2 2-2 2 .9 1.6-.7z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.4-8.1L1 10.5 21 3Zm-11.9 9.9L21 3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3z"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m2.5 3A5 5 0 0 1 22 19v1h-4"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 13h18m-11 0v2h4v-2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3 8.5 8 11 5-2.5 8-6 8-11V5z"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="m4 9 4-1 5-4v16l-5-4H4V9Zm12-2a7 7 0 0 1 0 10m2-13a11 11 0 0 1 0 16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5 10a7.5 7.5 0 0 1 13-3l2 5M4 12l2 5a7.5 7.5 0 0 0 13-3"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8 16c0-2.5-4-4.5-4-8a8 8 0 0 1 16 0c0 3.5-4 5.5-4 8l-1 2H9z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 5.4a5.4 5.4 0 0 0-7.6 0L12 6.6l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 22l8.8-9a5.4 5.4 0 0 0 0-7.6Z"/></symbol>
+  </svg>
+
+  <div class="layout" id="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation latérale">
+      <div class="brand"><span class="sun-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Neuro Bob <b>+</b></span></div>
+      <p class="sidebar-eyebrow">L'IA qui aide à se comprendre</p>
+      <nav class="side-nav" aria-label="Navigation principale">
+        <button class="nav-button is-current" data-view="accueil" aria-current="page"><svg><use href="#i-home"></use></svg>Accueil</button>
+        <button class="nav-button" data-view="discuter"><svg><use href="#i-chat"></use></svg>Discuter avec Bob</button>
+        <button class="nav-button" data-view="explorer"><svg><use href="#i-compass"></use></svg>Explorer les sujets</button>
+        <button class="nav-button" data-view="ressources"><svg><use href="#i-book"></use></svg>Ressources</button>
+        <button class="nav-button" data-view="apropos"><svg><use href="#i-info"></use></svg>À propos du projet</button>
+      </nav>
+      <div class="side-spacer"></div>
+      <div class="sidebar-note"><span class="note-orb">✦</span><strong>Chaque fonctionnement mérite d'être compris.</strong><span>Sans étiquette ni jugement.</span></div>
+      <button class="sidebar-settings" id="open-settings-side"><svg><use href="#i-settings"></use></svg>Mes préférences</button>
+      <div class="side-wave" aria-hidden="true"></div>
+    </aside>
+
+    <div class="shell">
+      <header class="topbar">
+        <div class="topbar-left"><button id="mobile-menu" class="icon-btn mobile-only" aria-expanded="false" aria-controls="sidebar" aria-label="Ouvrir le menu"><svg><use href="#i-menu"></use></svg></button><span class="topbar-path">Votre espace de découverte <span class="topbar-sep">/</span> <strong id="page-label">Accueil</strong></span></div>
+        <div class="topbar-actions"><span class="prototype-tag"><span></span> Prototype interactif</span><button class="icon-btn settings-top" id="open-settings" aria-label="Personnaliser l'accessibilité"><svg><use href="#i-settings"></use></svg></button></div>
+      </header>
+
+      <main id="main-content" tabindex="-1">
+        <section class="page" data-page="accueil" aria-labelledby="welcome-title">
+          <div class="hero">
+            <div class="hero-copy"><p class="eyebrow"><span class="mini-star">✳</span> BIENVENUE DANS UN ESPACE POUR TOUS</p>
+              <h1 id="welcome-title">Bonjour ! <span class="greeting-spark" aria-hidden="true">✴</span><br><span class="thin">Je suis</span> <span class="brand-gradient">Neuro Bob+</span></h1>
+              <p class="hero-lead">Et si on apprenait à <strong>mieux se comprendre ?</strong></p>
+              <p class="hero-description">Je vous aide à décoder les comportements, à comprendre les différences de fonctionnement et à trouver des pistes concrètes pour mieux vivre et travailler ensemble.</p>
+              <div class="hero-pills"><span><svg><use href="#i-heart"></use></svg>Sans jugement</span><span><svg><use href="#i-people"></use></svg>Pour toutes et tous</span></div>
+            </div>
+            <div class="hero-art" aria-hidden="true"><div class="hero-blob"></div><img src="./assets/neuro-bob.svg" alt="" width="430" height="420"><span class="hero-doodle doodle-1">✦</span><span class="hero-doodle doodle-2">✳</span></div>
+          </div>
+
+          <form id="quick-form" class="quick-form" autocomplete="off">
+            <label for="quick-question" class="sr-only">Poser une question à Neuro Bob+</label>
+            <svg class="quick-spark"><use href="#i-spark"></use></svg>
+            <input id="quick-question" name="question" placeholder="Posez-moi votre question, même celle que vous n'osez pas poser…" maxlength="2500" required>
+            <button type="submit" class="send-button" aria-label="Poser ma question"><svg><use href="#i-send"></use></svg></button>
+          </form>
+          <div class="section-heading perspective-heading"><div><p class="eyebrow">DEUX REGARDS, UNE MÊME CURIOSITÉ</p><h2>Comprendre l'autre, dans les deux sens.</h2><p>Choisissez un sujet, pas une étiquette : ces parcours sont ouverts à tout le monde.</p></div></div>
+          <div class="perspectives">
+            <button class="perspective-card atypique" data-topic="atypiques"><span class="perspective-icon"><svg><use href="#i-spark"></use></svg></span><span class="perspective-text"><span class="card-kicker">PREMIER REGARD</span><strong>Comprendre les fonctionnements neuroatypiques</strong><small>Explorer les besoins, les perceptions et les modes de communication de personnes neuroatypiques.</small></span><span class="circle-arrow"><svg><use href="#i-arrow"></use></svg></span></button>
+            <button class="perspective-card typique" data-topic="typiques"><span class="perspective-icon"><svg><use href="#i-people"></use></svg></span><span class="perspective-text"><span class="card-kicker">AUTRE REGARD, TOUT AUSSI IMPORTANT</span><strong>Décoder les codes et comportements neurotypiques</strong><small>Comprendre les sous-entendus, les attentes implicites et certaines conventions sociales.</small></span><span class="circle-arrow"><svg><use href="#i-arrow"></use></svg></span></button>
+          </div>
+          <div class="section-heading examples-heading"><div><p class="eyebrow">ON COMMENCE ?</p><h2>Quelques situations pour lancer la discussion</h2></div><button class="text-link" data-view="explorer">Tout explorer <svg><use href="#i-arrow"></use></svg></button></div>
+          <div class="scenario-grid">
+            <button class="scenario-card card-blue" data-prompt="Pourquoi les sous-entendus sont-ils si fréquents dans certaines conversations au travail ? Comment les décoder sans deviner ?"><span class="scenario-emoji">💬</span><strong>Décoder les sous-entendus</strong><small>Comprendre l'implicite sans devoir lire dans les pensées.</small><svg><use href="#i-arrow"></use></svg></button>
+            <button class="scenario-card card-green" data-prompt="Comment rendre une réunion plus inclusive pour des besoins de concentration, de rythme ou de communication différents ?"><span class="scenario-emoji">🌿</span><strong>Une réunion pour chacun</strong><small>Adapter les échanges sans présumer des besoins.</small><svg><use href="#i-arrow"></use></svg></button>
+            <button class="scenario-card card-purple" data-prompt="Comment exprimer un besoin d'aménagement au travail sans être obligé de révéler un diagnostic ?"><span class="scenario-emoji">✨</span><strong>Exprimer ses besoins</strong><small>Oser demander des ajustements sans se justifier.</small><svg><use href="#i-arrow"></use></svg></button>
+            <button class="scenario-card card-peach" data-prompt="Comment réagir face à un malentendu entre collègues sans supposer que l'un des deux a tort ?"><span class="scenario-emoji">🤝</span><strong>Sortir d'un malentendu</strong><small>Faire dialoguer différentes façons de fonctionner.</small><svg><use href="#i-arrow"></use></svg></button>
+          </div>
+          <div class="home-bottom"><div class="bottom-copy"><div class="bottom-icon"><svg><use href="#i-shield"></use></svg></div><div><strong>Un espace pour poser des questions librement.</strong><p>Aucun compte ni diagnostic n'est requis. En mode démo, vos messages restent dans cet onglet. En mode Claude, leur contenu est envoyé à Anthropic après votre accord.</p></div></div><button class="bottom-button" data-view="apropos">Notre démarche <svg><use href="#i-arrow"></use></svg></button></div>
+        </section>
+
+        <section class="page" data-page="discuter" hidden aria-labelledby="chat-title">
+          <div class="page-heading"><p class="eyebrow">UNE CONVERSATION SANS ÉTIQUETTE</p><h1 id="chat-title">Discutons, simplement. <span>✳</span></h1><p>Une question, un doute, une situation compliquée ? Bob vous aide à explorer des pistes, sans diagnostic ni jugement.</p></div>
+          <div class="chat-layout"><div class="conversation-panel">
+            <div class="chat-toolbar"><div class="chat-identity"><img src="./assets/neuro-bob.svg" alt="" width="46" height="46"><div><strong>Neuro Bob+</strong><span id="chat-mode-label">Mode démonstration</span></div></div><button class="quiet-button" id="reset-chat"><svg><use href="#i-refresh"></use></svg>Recommencer</button></div>
+            <div class="conversation-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions text">
+              <div class="message message-bot"><div class="message-avatar">✳</div><div class="message-inner"><span class="message-author">Neuro Bob+</span><div class="message-bubble">Bonjour ! Je suis là pour explorer avec vous différentes façons de penser, ressentir et communiquer. Quelle question avez-vous en tête ?</div></div></div>
+            </div>
+            <div class="chat-composer">
+              <form id="chat-form" autocomplete="off"><label class="sr-only" for="chat-input">Votre message</label><textarea id="chat-input" maxlength="2500" rows="2" required placeholder="Écrivez votre question ici…"></textarea><button type="submit" id="chat-send" class="send-button" aria-label="Envoyer le message"><svg><use href="#i-send"></use></svg></button></form>
+              <p>Entrée pour envoyer · Maj + Entrée pour un retour à la ligne</p>
+            </div>
+          </div>
+          <aside class="chat-context"><div class="context-card"><h2>Comment souhaitez-vous échanger ?</h2><p>Le mode démo fonctionne sans connexion à un modèle d'IA.</p><div class="mode-switch" role="group" aria-label="Mode de conversation"><button class="mode-choice is-selected" id="select-demo" aria-pressed="true">✳ Démonstration</button><button class="mode-choice" id="select-claude" aria-pressed="false">✦ Claude (en ligne)</button></div><div id="claude-disclosure" class="claude-disclosure" hidden><svg><use href="#i-lock"></use></svg><p>Vos messages et l'historique envoyé dans cette conversation seront transmis à Anthropic pour produire une réponse. Évitez les données personnelles ou médicales identifiantes.</p><label class="consent-label"><input type="checkbox" id="claude-consent"> J'accepte cet envoi pour cette conversation.</label></div><p id="demo-disclosure" class="disclosure-copy">En démonstration, les réponses sont des exemples scénarisés. Elles ne sont pas générées par une IA.</p></div>
+          <div class="context-card orientation"><h2>Un angle à explorer</h2><p>Sans vous demander de vous identifier à un profil :</p><div class="topic-chips"><button class="topic-chip is-selected" data-orientation="general" aria-pressed="true">Libre</button><button class="topic-chip" data-orientation="comportements neurotypiques" aria-pressed="false">Codes neurotypiques</button><button class="topic-chip" data-orientation="fonctionnements neuroatypiques" aria-pressed="false">Fonctionnements neuroatypiques</button><button class="topic-chip" data-orientation="situations professionnelles" aria-pressed="false">Au travail</button></div></div>
+          <div class="context-card soft-card"><div class="context-card-icon"><svg><use href="#i-lightbulb"></use></svg></div><h2>Besoin d'une idée ?</h2><button class="example-link" data-prompt="Pourquoi certaines personnes disent-elles oui alors qu'elles ne sont pas d'accord ?">Pourquoi dit-on « oui » sans être d'accord ? <svg><use href="#i-arrow"></use></svg></button><button class="example-link" data-prompt="Comment clarifier une demande professionnelle qui me semble implicite ?">Comment demander des consignes explicites ? <svg><use href="#i-arrow"></use></svg></button></div></aside></div>
+        </section>
+
+        <section class="page" data-page="explorer" hidden aria-labelledby="explore-title">
+          <div class="page-heading"><p class="eyebrow">À VOTRE RYTHME</p><h1 id="explore-title">Explorer pour comprendre. <span>✳</span></h1><p>Des premiers repères pour ouvrir la discussion, poser une bonne question et imaginer des situations plus inclusives.</p></div>
+          <div class="filter-wrap"><label class="search-field"><svg><use href="#i-search"></use></svg><span class="sr-only">Rechercher parmi les sujets</span><input id="explore-search" type="search" placeholder="Rechercher : communication, DYS, aménagements, etc."></label><div class="filter-pills" aria-label="Filtrer les fiches"><button class="filter-pill is-selected" data-filter="tout" aria-pressed="true">Tous les sujets</button><button class="filter-pill" data-filter="decodage" aria-pressed="false">Comprendre l'autre</button><button class="filter-pill" data-filter="travail" aria-pressed="false">Au travail</button><button class="filter-pill" data-filter="reperes" aria-pressed="false">Repères</button></div></div>
+          <div id="resource-grid" class="resource-grid" aria-live="polite"></div>
+          <p class="explore-disclaimer"><svg><use href="#i-info"></use></svg>Ces fiches sont des contenus exploratoires pour la maquette, et non une base documentaire expertisée. Elles doivent être vérifiées avant un déploiement.</p>
+        </section>
+
+        <section class="page" data-page="ressources" hidden aria-labelledby="resources-title"><div class="page-heading"><p class="eyebrow">DES REPÈRES CONCRETS</p><h1 id="resources-title">Les ressources pour aller plus loin. <span>✳</span></h1><p>Un premier espace documentaire à enrichir avec des sources datées, relues et accessibles.</p></div><div class="resource-columns">
+          <article class="info-card"><span class="info-symbol">📖</span><h2>Clarifier les mots</h2><p>Neurodiversité, neurotypique, neuroatypique, besoins, adaptations : apprendre à décrire sans réduire une personne à une étiquette.</p><button class="text-link" data-view="explorer">Parcourir les fiches <svg><use href="#i-arrow"></use></svg></button></article>
+          <article class="info-card"><span class="info-symbol">🤝</span><h2>Parler des situations</h2><p>Demander des consignes claires, expliciter un implicite, organiser une réunion ou traverser un malentendu.</p><button class="text-link" data-prompt="Peux-tu me proposer une trame de conversation respectueuse pour clarifier un malentendu au travail ?">Tester une situation <svg><use href="#i-arrow"></use></svg></button></article>
+          <article class="info-card"><span class="info-symbol">♿</span><h2>Concevoir accessible</h2><p>La simplification, l'audio et le contraste sont des aides possibles. Ils ne remplacent pas les tests utilisateurs ou un audit d'accessibilité.</p><a href="https://accessibilite.numerique.gouv.fr/" target="_blank" rel="noopener noreferrer" class="external-link">Consulter le référentiel RGAA ↗</a></article>
+          <article class="info-card"><span class="info-symbol">🧩</span><h2>Construire la suite</h2><p>Documentation produit, choix encore ouverts, gardes-fous et tâches de développement sont détaillés dans le dépôt GitHub.</p><a href="https://github.com/Famickael/ia-neuroatypique/blob/main/docs/CONCEPT.md" target="_blank" rel="noopener noreferrer" class="external-link">Lire le cadrage du projet ↗</a></article>
+        </div></section>
+
+        <section class="page" data-page="apropos" hidden aria-labelledby="about-title"><div class="page-heading"><p class="eyebrow">L'IDÉE DERRIÈRE LE ROBOT</p><h1 id="about-title">Et si on se comprenait mieux ? <span>✳</span></h1><p>Neuro Bob+ est une maquette exploratoire née de réflexions collectives sur la neurodiversité et la vie au travail.</p></div>
+          <div class="about-highlight"><div><p class="eyebrow">LA CONVICTION DE DÉPART</p><h2>La compréhension va dans les deux sens.</h2><p>Les personnes neurotypiques peuvent découvrir les fonctionnements neuroatypiques. Les personnes neuroatypiques peuvent, tout autant, chercher à comprendre les comportements et conventions neurotypiques. Chacun peut poser une question sans se définir ni se justifier.</p></div><img src="./assets/neuro-bob.svg" alt="Mascotte Neuro Bob+ souriante" width="220" height="220"></div>
+          <div class="about-grid"><article class="info-card"><span class="info-symbol">🛡️</span><h2>Discrétion, pas anonymat garanti</h2><p>Aucun compte n'est requis. En démo, la conversation reste dans la mémoire de l'onglet et disparaît au rechargement. L'hébergeur peut toutefois traiter des données techniques. Avec Claude, les messages sont transmis au fournisseur après accord.</p></article><article class="info-card"><span class="info-symbol">🌱</span><h2>Pas de diagnostic</h2><p>Bob n'est ni un médecin, ni un outil d'évaluation de collaborateurs. Il n'identifie pas des personnes comme « neuroatypiques » à partir de leurs comportements.</p></article><article class="info-card"><span class="info-symbol">💡</span><h2>Une première expérimentation</h2><p>Le contenu, l'interface, les performances, les usages d'entreprise, l'accessibilité et la gouvernance des données doivent encore être testés et validés.</p></article></div>
+        </section>
+      </main>
+      <footer class="footer"><span>© Neuro Bob+ · Prototype de recherche & expérimentation</span><span>La différence n'a pas besoin d'être une distance. <b>✳</b></span></footer>
+    </div>
+  </div>
+
+  <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+    <div class="modal-heading"><div><p class="eyebrow">UN OUTIL QUI S'ADAPTE À VOUS</p><h2 id="settings-title">Confort de lecture</h2></div><button class="icon-btn" id="close-settings" aria-label="Fermer les paramètres"><svg><use href="#i-close"></use></svg></button></div>
+    <p>Choisissez les réglages qui vous conviennent. Ils ne définissent pas votre profil et restent sur cet appareil.</p>
+    <div class="settings-row"><div><strong>Texte plus grand</strong><span>Augmenter la taille du texte</span></div><label class="switch"><input type="checkbox" id="setting-large"><span class="switch-track"></span></label></div>
+    <div class="settings-row"><div><strong>Contraste renforcé</strong><span>Meilleure distinction des éléments</span></div><label class="switch"><input type="checkbox" id="setting-contrast"><span class="switch-track"></span></label></div>
+    <div class="settings-row"><div><strong>Réduire les animations</strong><span>Moins de mouvements à l'écran</span></div><label class="switch"><input type="checkbox" id="setting-motion"><span class="switch-track"></span></label></div>
+    <div class="settings-row"><div><strong>Interface apaisée</strong><span>Moins de décorations visuelles</span></div><label class="switch"><input type="checkbox" id="setting-simple"><span class="switch-track"></span></label></div>
+    <div class="settings-actions"><button id="reset-settings" class="quiet-button">Réinitialiser</button><button id="save-settings" class="primary-button">Terminé</button></div>
+  </dialog>
+
+  <dialog id="topic-dialog" class="topic-dialog" aria-labelledby="topic-title"><div class="modal-heading"><div><p id="topic-tag" class="eyebrow"></p><h2 id="topic-title"></h2></div><button class="icon-btn" id="close-topic" aria-label="Fermer la fiche"><svg><use href="#i-close"></use></svg></button></div><p id="topic-description" class="topic-description"></p><h3>Quelques pistes à explorer</h3><ul id="topic-points"></ul><button id="ask-topic" class="primary-button">En parler avec Bob <svg><use href="#i-arrow"></use></svg></button><p class="topic-footnote">Contenu de démonstration à documenter et valider.</p></dialog>
+  <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
+</body>
+</html>
