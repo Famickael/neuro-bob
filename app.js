@@ -194,8 +194,11 @@ function addMessage(role,text,simulated=false) {
 function demoAnswer(question) {
   const q=normalize(question);
   // Exemples scénarisés, non générés par une IA : montrer la profondeur visée, sans expertise individuelle.
+  // Priorité absolue : un message de détresse ne doit jamais recevoir une réponse générique.
+  if (/(me faire du mal|me tuer|suicid|envie d.en finir|plus envie de vivre|me suicider|mettre fin a mes jours|je veux mourir|scarif)/.test(q))
+    return "Ce que vous écrivez est important et je ne veux pas y répondre par un simple conseil.\n\nSi vous êtes en danger maintenant, appelez le 15 (SAMU) ou le 112.\n\nEn France, le 3114 (numéro national de prévention du suicide) répond gratuitement, 24 h/24 et 7 j/7, que ce soit pour vous ou pour un proche.\n\nVous pouvez aussi contacter le médecin du travail, votre médecin traitant ou une personne de confiance.\n\nNeuro Bob+ est un outil de sensibilisation : il ne peut pas vous accompagner dans une situation de crise, mais ces interlocuteurs le peuvent.";
   if (/(manager|responsable|collaborateur|collegue)/.test(q) && /(interrupt|prioris|changemen|comportement)/.test(q))
-    return "Dans ce type de situation, il est utile de distinguer le comportement observé de son interprétation.\n\n1. Mécanismes possibles : la priorisation et le contrôle des impulsions mobilisent notamment des fonctions exécutives. Des difficultés dans ces domaines peuvent apparaître dans certains TND, dont le TDAH, sans leur être spécifiques.\n\n2. Autres explications : surcharge, consignes contradictoires, manque de clarté des priorités, stress, rythme de réunion ou contexte relationnel.\n\n3. Que tester ? Clarifiez les priorités par écrit, annoncez les changements suffisamment tôt lorsque c'est possible, instaurez un cadre de prise de parole et demandez ce qui facilite le travail de la personne.\n\nSi le collaborateur vous a lui-même parlé d'un TND et souhaite échanger à ce sujet, vous pouvez approfondir les connaissances correspondantes sans réduire tous ses comportements au diagnostic.\n\nPour approfondir, consultez « Un collaborateur interrompt et peine à prioriser » dans la Bibliothèque. Ceci est une réponse de démonstration, pas une analyse clinique.";
+    return "Dans ce type de situation, il est utile de distinguer le comportement observé de son interprétation.\n\n1. Mécanismes possibles : la priorisation et le contrôle des impulsions mobilisent notamment des fonctions exécutives. Des difficultés dans ces domaines peuvent apparaître dans plusieurs situations, liées ou non à un trouble du neurodéveloppement ; elles ne sont spécifiques à aucun profil, et rien ici ne permet de dire de quoi il s'agit pour cette personne.\n\n2. Autres explications : surcharge, consignes contradictoires, manque de clarté des priorités, stress, rythme de réunion ou contexte relationnel.\n\n3. Que tester ? Clarifiez les priorités par écrit, annoncez les changements suffisamment tôt lorsque c'est possible, instaurez un cadre de prise de parole et demandez ce qui facilite le travail de la personne.\n\nSi le collaborateur vous a lui-même parlé d'un TND et souhaite échanger à ce sujet, vous pouvez approfondir les connaissances correspondantes sans réduire tous ses comportements au diagnostic.\n\nPour approfondir, consultez « Un collaborateur interrompt et peine à prioriser » dans la Bibliothèque. Ceci est une réponse de démonstration, pas une analyse clinique.";
   if (/je suis neurotypique/.test(q))
     return "Vous pouvez tout à fait chercher à comprendre la neurodiversité, y compris comme collègue ou manager.\n\nSelon la situation, Bob peut vous expliquer les fonctions cognitives en jeu (attention, mémoire de travail, planification, inhibition, sensorialité), les variations individuelles et les mécanismes possibles dans certains TND.\n\nPour une réponse utile, décrivez un comportement ou une difficulté concrète : ce qui se passe, dans quel contexte et quelles conséquences vous observez. Nous examinerons les hypothèses neurocognitives ET les explications organisationnelles, puis des ajustements possibles.\n\nLa Bibliothèque propose déjà des fiches TDAH, DYS, autisme et des cas RH (contenus encore à valider).";
   if (/je suis neuroatypique/.test(q))
@@ -342,21 +345,27 @@ function renderLibrary() {
     const all=normalize([a.title,a.abstract,a.format,...a.sections.map(s=>s.text)].join(" "));
     return matchCategory && (!search || all.includes(search));
   });
+  const count=$("#library-count");
+  if(count) {
+    const drafts=filtered.filter(a=>a.status==="ebauche").length;
+    count.textContent=filtered.length+" contenu"+(filtered.length>1?"s":"")+" · "+(filtered.length-drafts)+" documenté"+(filtered.length-drafts>1?"s":"")+", "+drafts+" ébauche"+(drafts>1?"s":"")+" de maquette";
+  }
   if(!filtered.length) {
     grid.append(libraryNode("p","Aucun contenu ne correspond à cette recherche. Essayez un autre terme.","no-results"));
     return;
   }
   for(const article of filtered) {
-    const b=libraryNode("button",null,"library-card");
+    const draft=article.status==="ebauche";
+    const b=libraryNode("button",null,"library-card"+(draft?" is-draft":""));
     b.type="button";
     b.setAttribute("aria-label","Lire : "+article.title);
     b.append(
       libraryNode("span",article.icon,"library-emoji"),
-      libraryNode("span",article.format+" · "+article.readingMinutes+" min","library-category"),
+      libraryNode("span",article.format+(draft?"":" · "+article.readingMinutes+" min"),"library-category"),
       libraryNode("strong",article.title),
       libraryNode("span",article.abstract,"library-summary"),
-      libraryNode("span","Démonstration documentée · À valider","library-card-status"),
-      libraryNode("span","Lire le contenu →","library-more")
+      libraryNode("span",draft?"Ébauche · Contenu à rédiger":"Démonstration documentée · À valider","library-card-status"),
+      libraryNode("span",draft?"Voir le sommaire prévu →":"Lire le contenu →","library-more")
     );
     b.addEventListener("click",()=>openEditorial(article.id));
     grid.append(b);
@@ -367,7 +376,9 @@ function openEditorial(id) {
   if(!a)return;
   currentArticle=a;
   $("#editorial-title").textContent=a.title;
-  $("#editorial-type").textContent=a.format+" · "+a.readingMinutes+" min de lecture";
+  const draft=a.status==="ebauche";
+  $("#editorial-type").textContent=a.format+(draft?" · Ébauche":" · "+a.readingMinutes+" min de lecture");
+  $("#editorial-status").textContent=draft?"Ébauche de maquette — seul le sommaire est prévu ; le contenu reste à rédiger et à valider.":"Contenu de démonstration documenté — en attente de validation éditoriale.";
   $("#editorial-abstract").textContent=a.abstract;
   const sections=$("#editorial-sections"); sections.replaceChildren();
   for(const item of a.sections){
@@ -376,7 +387,9 @@ function openEditorial(id) {
     sections.append(section);
   }
   const sources=$("#editorial-sources-list");sources.replaceChildren();
-  if(a.sources.length===0) {
+  if(draft) {
+    sources.append(libraryNode("p","Sources à sélectionner lors de la rédaction (institutions de santé, recherche, associations de personnes concernées), avec leur date et leurs limites."));
+  } else if(a.sources.length===0) {
     sources.append(libraryNode("p","Cette fiche est un exemple d'explication contextualisée. Aucune source académique particulière n'est revendiquée pour ces illustrations de langage. La validation éditoriale reste à réaliser."));
   } else {
     for(const src of a.sources) {

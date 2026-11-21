@@ -60,7 +60,7 @@ La zone d'idéation, sous le titre « Avoir un agent IA adapté sur le sujet : a
 3. Application orientée **questions/réponses**, mais également exploration par thèmes et outils.
 4. L'utilisateur a explicitement demandé que les **comportements neurotypiques soient expliqués aux personnes neuroatypiques**, au même niveau que l'inverse.
 5. Une planche de mascottes puis un GIF de Neuro Bob+ ont été produits comme explorations graphiques ; leurs fichiers ne constituent pas un design system ni des assets de production validés.
-6. Première implémentation prévue sur le dépôt GitHub **Famickael/ia-neuroatypique** ; futur branchement à l'API Anthropic.
+6. Première implémentation prévue sur le dépôt GitHub **Famickael/ia-neuroatypique**, renommé ensuite en **Famickael/neuro-bob** (le produit garde le nom « Neuro Bob+ ») ; futur branchement à l'API Anthropic.
 
 ## 4. Publics et situations d'usage
 

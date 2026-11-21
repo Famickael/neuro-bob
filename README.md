@@ -2,6 +2,8 @@
 
 **Une plateforme de contenus et un agent IA dédiés à la neurodiversité, aux explications neurocognitives et à la compréhension réciproque.**
 
+> Dépôt GitHub : [Famickael/neuro-bob](https://github.com/Famickael/neuro-bob) (anciennement `ia-neuroatypique`).
+
 Neuro Bob+ est une **maquette interactive** d'agent IA sur la neurodiversité, les comportements et les situations professionnelles. Le projet est issu d'un atelier de prototypage dont les observations et questions sont documentées dans [docs/CONCEPT.md](docs/CONCEPT.md).
 
 > **V0.2 — Prototype d'expérimentation, pas service de production.**
