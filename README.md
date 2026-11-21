@@ -7,6 +7,17 @@ Neuro Bob+ est une **maquette interactive** d'agent IA sur la neurodiversité, l
 > **V0.1 — Prototype d'expérimentation, pas service de production.**
 > L'interface et le mode démonstration fonctionnent sans clé. Le mode Claude nécessite une configuration serveur et des contrôles supplémentaires avant une mise à disposition publique.
 
+## Design et assets de la démonstration
+
+- **Référence visuelle à respecter** : [dernière maquette présentée](design/reference-interface-validee.jpg).
+- **12 poses individuelles** : [assets/characters](assets/characters/), 12 PNG de 512 × 512 px avec véritable fond transparent. Les intitulés et usages sont dans [manifest.json](assets/characters/manifest.json).
+- **GIF animé** : [Neuro Bob+ trouve une idée](assets/neuro-bob-idee.gif).
+- **Galerie intégrée** : ouvrir « Ressources » dans la démonstration pour parcourir et télécharger chaque pose.
+
+La page d'accueil a été rapprochée de la maquette validée : navigation bleue, zone de bienvenue avec Neuro Bob+ au centre, champ de question, cinq cartes pastel, filtres thématiques et trois panneaux à droite (mission, outils, engagements). Les autres pages restent les vues fonctionnelles du prototype.
+
+**Déploiement GitHub Pages** : le workflow `.github/workflows/deploy-pages.yml` copie le site, tout le répertoire `assets/` et `design/` afin que les images ne soient pas absentes du site publié. L'API Anthropic reste indisponible sur Pages seul : utiliser une fonction serveur séparée pour le mode Claude.
+
 ## Pourquoi ce projet ?
 
 L'enjeu n'est pas seulement d'aider les personnes neurotypiques à comprendre les fonctionnements neuroatypiques. **Les personnes neuroatypiques doivent pouvoir, elles aussi, explorer et décoder les codes, comportements et conventions neurotypiques**, sans stigmatisation et sans obligation de déclarer un profil.
