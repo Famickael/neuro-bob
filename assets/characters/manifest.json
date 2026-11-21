@@ -1,0 +1,86 @@
+[
+  {
+    "file": "01-salut.png",
+    "description": "Salue de la main",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "02-orientation.png",
+    "description": "Montre une direction",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "03-reflexion.png",
+    "description": "Réfléchit",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "04-ecoute.png",
+    "description": "Écoute",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "05-celebration.png",
+    "description": "Célèbre",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "06-accueil.png",
+    "description": "Accueille",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "07-presentation.png",
+    "description": "Présente un graphique",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "08-lecture.png",
+    "description": "Lit un livre",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "09-exploration.png",
+    "description": "Explore avec une loupe",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "10-empathie.png",
+    "description": "Tient un cœur",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "11-validation.png",
+    "description": "Valide une idée",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  },
+  {
+    "file": "12-conversation.png",
+    "description": "Converse",
+    "width": 512,
+    "height": 512,
+    "transparent": true
+  }
+]
