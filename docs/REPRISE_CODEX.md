@@ -1,14 +1,16 @@
-## Assets et validation UI/UX (ajout)
+## Assets et historique UI/UX (références évolutives)
 
-- **Dernière maquette graphique approuvée comme direction** : `design/reference-interface-validee.jpg`.
+- **Référence visuelle historique, non obligatoire** : `design/reference-interface-validee.jpg`.
 - **12 variantes PNG transparentes** : `assets/characters/01-salut.png` à `12-conversation.png`, avec `manifest.json`.
 - **GIF** : `assets/neuro-bob-idee.gif`.
-- **Page d'accueil** : cinq grandes actions pastel, robot 3D principal, question libre, thèmes rapides, trois cartes de bas de page et colonne droite de panneaux ; présence visible des comportements neurotypiques.
+- **État de la page d'accueil actuelle (peut changer)** : cinq grandes actions pastel, robot 3D principal, question libre, thèmes rapides, trois cartes de bas de page et colonne droite de panneaux ; présence visible des comportements neurotypiques.
 - **Page Ressources** : galerie de 12 poses téléchargeables.
-- Ne pas confondre une maquette visuelle validée avec une certification RGAA, sécurité ou expertise scientifique.
+- Prioriser les besoins et résultats de test. La maquette n'est plus une contrainte pixel à pixel. Ne pas confondre apparence, certification RGAA, sécurité et expertise scientifique.
 - Vérifier les chemins après chaque changement de workflow GitHub Pages.
 
 # Guide de reprise — Codex / Claude Code / autres agents
+
+> **Nouvelle priorité :** lire `docs/PRODUCT_VISION_V2.md`, `docs/PRODUCT_ROADMAP.md`, `docs/AI_BEHAVIOR_POLICY.md` et `docs/EVALUATION_PLAN.md`. Les images restent des assets, pas l'objectif final.
 
 ## Objectif
 Continuer le prototype **Neuro Bob+**, agent IA conversationnel et ressource pédagogique sur la compréhension mutuelle entre comportements neurotypiques et neuroatypiques.
