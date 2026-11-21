@@ -312,6 +312,8 @@ function initialize() {
   applySettings();
   renderTopics();
   document.addEventListener("click",event=>{
+    const settingsLink=event.target.closest("[data-open-settings]");
+    if(settingsLink) { $("#settings-dialog").showModal(); return; }
     const nav=event.target.closest("[data-view]");
     if(nav) { navigate(nav.dataset.view);return; }
     const prompt=event.target.closest("[data-prompt]");
