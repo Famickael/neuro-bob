@@ -1,3 +1,13 @@
+## Assets et validation UI/UX (ajout)
+
+- **Dernière maquette graphique approuvée comme direction** : `design/reference-interface-validee.jpg`.
+- **12 variantes PNG transparentes** : `assets/characters/01-salut.png` à `12-conversation.png`, avec `manifest.json`.
+- **GIF** : `assets/neuro-bob-idee.gif`.
+- **Page d'accueil** : cinq grandes actions pastel, robot 3D principal, question libre, thèmes rapides, trois cartes de bas de page et colonne droite de panneaux ; présence visible des comportements neurotypiques.
+- **Page Ressources** : galerie de 12 poses téléchargeables.
+- Ne pas confondre une maquette visuelle validée avec une certification RGAA, sécurité ou expertise scientifique.
+- Vérifier les chemins après chaque changement de workflow GitHub Pages.
+
 # Guide de reprise — Codex / Claude Code / autres agents
 
 ## Objectif
