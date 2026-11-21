@@ -1,10 +1,10 @@
 {
   "name": "neuro-bob-plus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
-    "check": "node --check app.js && node --check api/chat.js"
+    "check": "node --check app.js && node --check editorial.js && node --check api/chat.js && node --test tests/editorial.test.mjs"
   }
 }
