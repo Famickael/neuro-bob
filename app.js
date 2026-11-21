@@ -1,9 +1,11 @@
+import { editorialArticles, editorialCategories } from "./editorial.js";
+
 /* Neuro Bob+ — application de démonstration sans dépendance.
  * Les messages ne sont pas sauvegardés ; seuls les réglages visuels peuvent l'être.
  */
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-const titles = { accueil:"Accueil", discuter:"Discuter", explorer:"Explorer", ressources:"Ressources", apropos:"À propos" };
+const titles = { accueil:"Accueil", discuter:"Discuter", explorer:"Explorer", bibliotheque:"Bibliothèque", ressources:"Outils & ressources", apropos:"À propos" };
 const welcome = "Bonjour ! Je suis là pour explorer avec vous différentes façons de penser, ressentir et communiquer. Quelle question avez-vous en tête ?";
 let view = "accueil";
 let chatMode = "demo";
@@ -303,6 +305,86 @@ function applySettings() {
   document.documentElement.classList.toggle("simple-mode",controls.simple);
   try { localStorage.setItem("neuro-bob-display",JSON.stringify(controls)); } catch {}
 }
+
+/* Bibliothèque : les contenus restent utilisables sans modèle IA ni compte utilisateur. */
+let libraryCategory="tous";
+let currentArticle=null;
+
+function libraryNode(tag,text,cls) {
+  const el=document.createElement(tag);
+  if(cls)el.className=cls;
+  if(typeof text==="string")el.textContent=text;
+  return el;
+}
+function renderLibrary() {
+  const filters=$("#library-filters");
+  const grid=$("#library-grid");
+  if(!filters || !grid)return;
+  filters.replaceChildren();
+  for(const category of editorialCategories) {
+    const b=libraryNode("button",category.label,"filter-pill"+(libraryCategory===category.id?" is-selected":""));
+    b.type="button";
+    b.setAttribute("aria-pressed",String(libraryCategory===category.id));
+    b.addEventListener("click",()=>{libraryCategory=category.id;renderLibrary();});
+    filters.append(b);
+  }
+  const search=normalize($("#library-search")?.value?.trim()||"");
+  grid.replaceChildren();
+  const filtered=editorialArticles.filter(a=>{
+    const matchCategory=libraryCategory==="tous" || a.category===libraryCategory;
+    const all=normalize([a.title,a.abstract,a.format,...a.sections.map(s=>s.text)].join(" "));
+    return matchCategory && (!search || all.includes(search));
+  });
+  if(!filtered.length) {
+    grid.append(libraryNode("p","Aucun contenu ne correspond à cette recherche. Essayez un autre terme.","no-results"));
+    return;
+  }
+  for(const article of filtered) {
+    const b=libraryNode("button",null,"library-card");
+    b.type="button";
+    b.setAttribute("aria-label","Lire : "+article.title);
+    b.append(
+      libraryNode("span",article.icon,"library-emoji"),
+      libraryNode("span",article.format+" · "+article.readingMinutes+" min","library-category"),
+      libraryNode("strong",article.title),
+      libraryNode("span",article.abstract,"library-summary"),
+      libraryNode("span","Démonstration documentée · À valider","library-card-status"),
+      libraryNode("span","Lire le contenu →","library-more")
+    );
+    b.addEventListener("click",()=>openEditorial(article.id));
+    grid.append(b);
+  }
+}
+function openEditorial(id) {
+  const a=editorialArticles.find(item=>item.id===id);
+  if(!a)return;
+  currentArticle=a;
+  $("#editorial-title").textContent=a.title;
+  $("#editorial-type").textContent=a.format+" · "+a.readingMinutes+" min de lecture";
+  $("#editorial-abstract").textContent=a.abstract;
+  const sections=$("#editorial-sections"); sections.replaceChildren();
+  for(const item of a.sections){
+    const section=document.createElement("section");
+    section.append(libraryNode("h3",item.title),libraryNode("p",item.text));
+    sections.append(section);
+  }
+  const sources=$("#editorial-sources-list");sources.replaceChildren();
+  if(a.sources.length===0) {
+    sources.append(libraryNode("p","Cette fiche est un exemple d'explication contextualisée. Aucune source académique particulière n'est revendiquée pour ces illustrations de langage. La validation éditoriale reste à réaliser."));
+  } else {
+    for(const src of a.sources) {
+      const entry=libraryNode("div",null,"editorial-source");
+      const link=libraryNode("a",src.name+" ("+src.date+") ↗");
+      link.href=src.url;
+      link.target="_blank";
+      link.rel="noopener noreferrer";
+      entry.append(link,libraryNode("p","Limite : "+src.limitation));
+      sources.append(entry);
+    }
+  }
+  $("#editorial-dialog").showModal();
+}
+
 function initialize() {
   // GitHub Pages est un hébergement statique : ne pas promettre un chat IA qui ne peut pas répondre.
   if (window.location.hostname.endsWith(".github.io")) {
@@ -321,6 +403,18 @@ function initialize() {
   $("#setting-simple").checked=preferences.simple;
   applySettings();
   renderTopics();
+  renderLibrary();
+  $("#library-search").addEventListener("input",renderLibrary);
+  const editorialDialog=$("#editorial-dialog");
+  $("#editorial-close").addEventListener("click",()=>editorialDialog.close());
+  $("#editorial-done").addEventListener("click",()=>editorialDialog.close());
+  $("#editorial-ask").addEventListener("click",()=>{
+    if(!currentArticle)return;
+    const text=currentArticle.prompt;
+    editorialDialog.close();
+    draftQuestion(text);
+  });
+  editorialDialog.addEventListener("click",event=>{if(event.target===editorialDialog)editorialDialog.close();});
   document.addEventListener("click",event=>{
     const settingsLink=event.target.closest("[data-open-settings]");
     if(settingsLink) { $("#settings-dialog").showModal(); return; }
