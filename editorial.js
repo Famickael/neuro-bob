@@ -9,6 +9,7 @@ export const editorialArticles = [
   {
     id: "tdah-reperes",
     title: "TDAH : comprendre les mécanismes sans réduire une personne à un symptôme",
+    status: "demo",
     format: "Fiche repère",
     category: "neurocognition",
     icon: "🧠",
@@ -28,6 +29,7 @@ export const editorialArticles = [
   {
     id: "manager-priorites",
     title: "Un collaborateur interrompt et peine à prioriser : quelles hypothèses explorer ?",
+    status: "demo",
     format: "Situation RH",
     category: "travail",
     icon: "🤝",
@@ -48,6 +50,7 @@ export const editorialArticles = [
   {
     id: "codes-neurotypiques",
     title: "Décoder les conventions neurotypiques : ce que peut vouloir dire « on verra »",
+    status: "demo",
     format: "Décryptage",
     category: "comportements",
     icon: "💬",
@@ -64,6 +67,7 @@ export const editorialArticles = [
   {
     id: "dys-reperes",
     title: "Troubles DYS : de quoi parle-t-on réellement ?",
+    status: "demo",
     format: "Fiche repère",
     category: "neurocognition",
     icon: "📚",
@@ -82,6 +86,7 @@ export const editorialArticles = [
   {
     id: "amenagement-travail",
     title: "Demander un aménagement de travail sans se sentir obligé de tout raconter",
+    status: "demo",
     format: "Guide pratique",
     category: "travail",
     icon: "🌿",
@@ -101,6 +106,7 @@ export const editorialArticles = [
   {
     id: "autisme-sensorialite",
     title: "Autisme : sensorialité, communication et diversité des expériences",
+    status: "demo",
     format: "Fiche repère",
     category: "neurocognition",
     icon: "🌈",
@@ -115,12 +121,63 @@ export const editorialArticles = [
       { name: "Inserm — Dossier Autisme", date: "Consulté en 2026", url: "https://www.inserm.fr/dossier/autisme/", limitation: "Dossier général ; ne permet pas d'inférer un diagnostic à partir d'un comportement professionnel." }
     ],
     prompt: "Comment comprendre les dimensions sensorielles et de communication de l'autisme, et que peut-on adapter au travail sans stéréotype ?"
-  }
+  },
+  ...[
+    // ───── Neurodivergences A–Z ─────
+    ["neurodiversite-definition","Neurodiversité, neurotypique, neurodivergent : les mots pour en parler","Fiche repère","neurodiversites","🔤","Un vocabulaire commun pour l'entreprise, sans étiquette ni jargon.",["Origine du terme neurodiversité","Neurotypique, neuroatypique, neurodivergent : nuances","Les mots à éviter et pourquoi","Glossaire interne"]],
+    ["dyslexie","Dyslexie : lire autrement","Fiche repère","neurodiversites","📖","Ce que recouvre la dyslexie chez l'adulte et ce qui facilite la lecture au travail.",["Définition et idées reçues","Manifestations possibles chez l'adulte","Documents et outils accessibles","Témoignage (à recueillir)"]],
+    ["dysorthographie","Dysorthographie : quand l'orthographe ne dit rien des compétences","Fiche repère","neurodiversites","✏️","Distinguer la maîtrise de l'orthographe de la qualité du travail.",["Définition","Impact sur les écrits professionnels","Correcteurs et relecture : bonnes pratiques","Ce qu'un manager peut faire"]],
+    ["dysgraphie","Dysgraphie : le geste d'écriture","Fiche repère","neurodiversites","🖊️","Écriture manuscrite, prise de notes et alternatives numériques.",["Définition","Situations concernées au travail","Alternatives : clavier, dictée, supports partagés"]],
+    ["dyscalculie","Dyscalculie : les nombres et le calcul","Fiche repère","neurodiversites","🔢","Chiffres, tableaux, estimations : comprendre et outiller.",["Définition","Tâches professionnelles concernées","Outils et présentation des données"]],
+    ["dyspraxie","Dyspraxie (TDC) : coordination et organisation du geste","Fiche repère","neurodiversites","🤹","Trouble développemental de la coordination : au-delà de la « maladresse ».",["Définition et terminologie (TDC)","Effets sur l'organisation et la fatigue","Aménagements possibles du poste"]],
+    ["dysphasie","Dysphasie (TDL) : le langage oral","Fiche repère","neurodiversites","💬","Trouble développemental du langage : comprendre et se faire comprendre à l'oral.",["Définition et terminologie (TDL)","Réunions, téléphone, consignes orales","Communication écrite et supports visuels"]],
+    ["hpi","Haut potentiel intellectuel (HPI) : ce que l'on sait et ce que l'on ne sait pas","Fiche repère","neurodiversites","✧","Un sujet très médiatisé : démêler connaissances et idées reçues. Le HPI n'est pas un trouble du neurodéveloppement.",["Définitions et mesures","Idées reçues fréquentes","Ce que la recherche ne permet pas d'affirmer","Au travail : éviter les stéréotypes"]],
+    ["tourette-tics","Syndrome de Gilles de la Tourette et tics","Fiche repère","neurodiversites","〰️","Comprendre les tics, réagir avec naturel et adapter l'environnement si besoin.",["Définition","Idées reçues","Réactions utiles et maladroites en équipe"]],
+    ["tdi","Trouble du développement intellectuel : inclusion et emploi","Fiche repère","neurodiversites","🧩","Repères sur le trouble du développement intellectuel et l'inclusion professionnelle.",["Définition","Dispositifs d'emploi et d'accompagnement","Consignes en facile à lire et à comprendre (FALC)"]],
+    ["cumul-profils","Plusieurs particularités à la fois : quand les profils se combinent","Fiche repère","neurodiversites","🔗","Les particularités se cumulent souvent : pourquoi chaque situation est singulière.",["Fréquence des associations","Pourquoi éviter les grilles de lecture uniques","Conséquences pour les aménagements"]],
+    // ───── Neurocognition ─────
+    ["fonctions-executives","Les fonctions exécutives expliquées simplement","Fiche mécanisme","neurocognition","⚙️","Planifier, inhiber, s'adapter : les « chefs d'orchestre » du cerveau.",["Inhibition, flexibilité, planification","Exemples au travail","Ce qui les met à l'épreuve : stress, fatigue, interruptions"]],
+    ["memoire-travail","Mémoire de travail : le bloc-notes mental","Fiche mécanisme","neurocognition","🗒️","Pourquoi les consignes orales en rafale se perdent, pour tout le monde.",["Définition","Capacité limitée et variable","Supports qui soulagent la mémoire de travail"]],
+    ["sensorialite","Sensorialité : bruit, lumière, open space","Fiche mécanisme","neurocognition","🔊","Hyper et hyposensibilités : quand l'environnement devient un sujet de travail.",["Les différents canaux sensoriels","Seuils individuels et fatigue","Adapter les espaces : pistes concrètes"]],
+    ["fatigue-cognitive","Charge et fatigue cognitive","Fiche mécanisme","neurocognition","🔋","Ce qui épuise vraiment dans une journée de travail.",["Charge cognitive : notion","Signaux de surcharge","Rythmes et pauses"]],
+    ["masquage","Le masquage (camouflage social)","Fiche mécanisme","neurocognition","🎭","Compenser pour « passer inaperçu » : un effort souvent invisible et coûteux.",["Définition","Coûts possibles du masquage","Ce qu'une équipe peut faire pour le rendre moins nécessaire"]],
+    // ───── Décoder les codes ─────
+    ["small-talk","Le « small talk » : à quoi sert la conversation légère ?","Décodage","comportements","☕","Machine à café, début de réunion : fonctions sociales d'un échange apparemment inutile.",["Ce que le small talk fait (et ne fait pas)","Sujets et durées habituels","Le droit de ne pas y participer"]],
+    ["ce-serait-bien","« Ce serait bien si… » : suggestion ou demande ?","Décodage","comportements","🧭","Les demandes indirectes et comment les clarifier sans malaise.",["Formulations indirectes fréquentes","Indices de contexte","Questions de clarification prêtes à l'emploi"]],
+    ["feedback-implicite","Lire un feedback implicite","Décodage","comportements","📝","« C'est intéressant… » : comprendre les retours enrobés et demander des retours explicites.",["Les feedbacks enrobés","Demander un retour concret","Côté manager : donner des retours explicites"]],
+    ["emails-codes","Les codes des e-mails professionnels","Décodage","comportements","✉️","Formules, délais de réponse, copie : les règles non écrites du courriel.",["Formules d'appel et de politesse","Mettre en copie : ce que ça signifie","Délais de réponse attendus"]],
+    ["humour-second-degre","Humour, ironie et second degré au bureau","Décodage","comportements","😏","Repérer le second degré et dire simplement quand on ne l'a pas saisi.",["Indices de l'ironie","Quand le doute persiste","Côté équipe : éviter l'humour excluant"]],
+    // ───── Travail & RH ─────
+    ["onboarding-inclusif","Un onboarding inclusif dès le premier jour","Guide pratique","travail","🚪","Accueillir chaque nouvel arrivant avec des repères explicites.",["Checklist avant l'arrivée","Premier jour : informations écrites","Point d'étonnement à J+30"]],
+    ["reunions-inclusives","Organiser des réunions inclusives","Guide pratique","travail","🗓️","Ordre du jour, tours de parole, contributions écrites : un cadre qui aide tout le monde.",["Avant : ordre du jour et objectifs","Pendant : règles de parole et pauses","Après : compte rendu et décisions écrites"]],
+    ["entretien-annuel","L'entretien annuel sans malentendus","Guide pratique","travail","🗣️","Préparer, conduire et formaliser un entretien clair pour les deux parties.",["Préparation partagée","Questions explicites","Écrire ce qui a été convenu"]],
+    ["open-space-teletravail","Open space, flex office et télétravail","Guide pratique","travail","🏢","Organisation des espaces et du travail à distance : options à discuter.",["Zones calmes et réservation","Télétravail : critères à discuter","Équipements (casques, éclairage)"]],
+    ["rqth-mission-handicap","RQTH, mission handicap et référent : qui fait quoi ?","Guide pratique","travail","🤝","Les interlocuteurs internes et externes, et ce que chacun peut (ou ne peut pas) savoir.",["Rôle de la mission handicap de l'entreprise","RQTH : principe et confidentialité","Médecin du travail et aménagements","Contacts internes : [à compléter par l'entreprise]"]],
+    ["consignes-ecrites","Des consignes claires et écrites","Outil","travail","📋","Un modèle de consigne utilisable par toutes les équipes.",["Modèle : objectif, livrable, échéance, priorité","Exemples avant / après","Vérifier la compréhension sans infantiliser"]],
+    // ───── Parcours de sensibilisation ─────
+    ["module-1-bases","Module 1 — Les bases de la neurodiversité","Module de sensibilisation","sensibilisation","1️⃣","15 minutes pour poser un vocabulaire commun et déconstruire les idées reçues.",["Vidéo d'introduction (à produire)","Quiz : vrai ou faux ?","À retenir"]],
+    ["module-2-codes","Module 2 — Décoder les codes implicites au travail","Module de sensibilisation","sensibilisation","2️⃣","Les règles non écrites de l'entreprise, expliquées dans les deux sens.",["Situations illustrées","Exercice : reformuler une demande implicite","À retenir"]],
+    ["module-3-manager","Module 3 — Manager sans étiqueter","Module de sensibilisation","sensibilisation","3️⃣","Partir des faits et des mécanismes, jamais d'un diagnostic supposé.",["Faits, interprétations, hypothèses","Cas pratiques interactifs (avec Bob)","Ce qu'un manager ne doit pas faire","À retenir"]],
+    ["module-4-amenagements","Module 4 — Du besoin à l'aménagement","Module de sensibilisation","sensibilisation","4️⃣","Exprimer un besoin, construire un aménagement, faire le point.",["Formuler un besoin sans tout dévoiler","Le circuit dans l'entreprise","Suivre et ajuster"]],
+    ["module-5-equipe","Module 5 — Atelier d'équipe : mieux travailler ensemble","Module de sensibilisation","sensibilisation","5️⃣","Un kit d'animation pour une séquence collective de 45 minutes.",["Déroulé animateur","Cartes de situations","Charte d'équipe à co-construire"]]
+  ].map(([id,title,format,category,icon,abstract,outline])=>({
+    id, title, format, category, icon, abstract,
+    status: "ebauche",
+    readingMinutes: null,
+    sections: [
+      { title: "Sommaire prévu", text: outline.map(item=>"• "+item).join("\n") },
+      { title: "Statut", text: "Ébauche de maquette : ce contenu reste à rédiger, à sourcer et à faire relire (experts et personnes concernées) avant toute diffusion." }
+    ],
+    sources: [],
+    prompt: "Peux-tu m'expliquer simplement : "+title.replace(/ :.*/,"")+" ?"
+  }))
 ];
 
 export const editorialCategories = [
   { id:"tous", label:"Tous les contenus" },
+  { id:"sensibilisation", label:"Parcours de sensibilisation" },
+  { id:"neurodiversites", label:"Neurodivergences A–Z" },
   { id:"neurocognition", label:"Neurocognition" },
-  { id:"comportements", label:"Comportements" },
+  { id:"comportements", label:"Décoder les codes" },
   { id:"travail", label:"Travail & RH" }
 ];

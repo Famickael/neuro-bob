@@ -1,3 +1,12 @@
+## DÉCISIONS DU PORTEUR — après la revue critique (21 novembre 2026, les plus récentes)
+
+Lire **`docs/DECISIONS_PORTEUR_2026-11-21.md`** avant tout le reste. En résumé :
+- **outil interne d'entreprise** : l'entreprise paie et possède Neuro Bob+ ; publics = ses collaborateurs ; finalité = **sensibilisation / formation / entraînement**, jamais évaluation, dépistage ou décision RH ;
+- **cas d'un tiers (option B)** : faits → mécanismes → contexte → actions ; **ne pas nommer de trouble** à propos d'une personne absente (sauf diagnostic partagé par elle) ;
+- **Bibliothèque d'abord**, en **maquette** : beaucoup d'ébauches (`status: "ebauche"`) acceptées ; l'objectif est de montrer fonctionnalités et positionnement ;
+- **périmètre** : toutes les neurodivergences, dont tous les DYS.
+La revue complète est dans `docs/REVUE_CRITIQUE_ET_RECOMMANDATIONS.md` (analyse d'IA, non validée).
+
 ## ORIENTATION V3 — décision produit la plus récente (21 novembre 2026)
 
 **Lire d'abord :**
