@@ -7,9 +7,19 @@ Neuro Bob+ est une **maquette interactive** d'agent IA sur la neurodiversité, l
 > **V0.1 — Prototype d'expérimentation, pas service de production.**
 > L'interface et le mode démonstration fonctionnent sans clé. Le mode Claude nécessite une configuration serveur et des contrôles supplémentaires avant une mise à disposition publique.
 
-## Design et assets de la démonstration
+## Direction produit — revue du 21 novembre 2026
 
-- **Référence visuelle à respecter** : [dernière maquette présentée](design/reference-interface-validee.jpg).
+**Le produit prime désormais sur la reproduction d'une interface.** Neuro Bob+ doit aider à comprendre, expliciter et ajuster des situations de communication et de collaboration, **dans les deux sens**, sans profilage ni diagnostic.
+
+Documents de travail (propositions à valider, pas résultats de cinq agents autonomes) :
+- [Vision produit V2](docs/PRODUCT_VISION_V2.md) — proposition de valeur, quatre parcours et hypothèses.
+- [Politique de comportement IA](docs/AI_BEHAVIOR_POLICY.md) — réponse de Bob, sources, limites et sécurité.
+- [Recherche et évaluation](docs/EVALUATION_PLAN.md) — étude exploratoire et seize tests critiques.
+- [Feuille de route produit](docs/PRODUCT_ROADMAP.md) — priorités basées sur l'utilité, pas sur l'esthétique.
+
+## Design et assets de la démonstration (références évolutives)
+
+- **Référence visuelle historique, non contraignante** : [dernière maquette présentée](design/reference-interface-validee.jpg).
 - **12 poses individuelles** : [assets/characters](assets/characters/), 12 PNG de 512 × 512 px avec véritable fond transparent. Les intitulés et usages sont dans [manifest.json](assets/characters/manifest.json).
 - **GIF animé** : [Neuro Bob+ trouve une idée](assets/neuro-bob-idee.gif).
 - **Galerie intégrée** : ouvrir « Ressources » dans la démonstration pour parcourir et télécharger chaque pose.
