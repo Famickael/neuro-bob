@@ -1,10 +1,18 @@
-## Direction artistique impérative
+## PRIORITÉ PRODUIT — décision du porteur du projet, 21 novembre 2026
 
-La référence graphique du propriétaire du projet est **`design/reference-interface-validee.jpg`**. Avant de redessiner l'accueil, comparez-le à cette image : sidebar bleue, robot 3D clair au centre, colonne droite « Ma mission / Outils pratiques / Nos engagements », cinq cartes pastel, boutons de thèmes, trois cartes finales. Le propriétaire a demandé une restitution nettement plus fidèle que le premier prototype.
+**Ne pas figer l'interface sur une ancienne image.** Le propriétaire du projet privilégie maintenant les objectifs, la valeur utilisateur, la compréhension réciproque, la fiabilité des contenus, l'inclusion et l'évaluation. Les choix UI/UX peuvent évoluer, y compris sensiblement, lorsqu'ils sont argumentés par les besoins et les tests.
 
-Les **12 personnages séparés** se trouvent dans `assets/characters/*.png` (512×512, fonds transparents), décrits par `assets/characters/manifest.json`. Utilisez-les plutôt que de redessiner arbitrairement un autre robot. L'animation de concept est `assets/neuro-bob-idee.gif`.
+Ordre de lecture avant de proposer des tâches :
+1. `docs/CONCEPT.md` — traces des ateliers et éléments vraiment exprimés ;
+2. `docs/PRODUCT_VISION_V2.md` — nouvelle hypothèse de valeur et parcours ;
+3. `docs/AI_BEHAVIOR_POLICY.md` — limites et réponse attendue de Bob ;
+4. `docs/EVALUATION_PLAN.md` — tests utilisateurs et cas critiques ;
+5. `docs/PRODUCT_ROADMAP.md` — priorités, critères et risques ;
+6. `docs/REPRISE_CODEX.md` — contexte technique.
 
-Dans le workflow Pages, toujours publier le dossier complet `assets/`, sinon les illustrations manqueront malgré leur présence sur GitHub. Le mode Claude ne peut pas fonctionner sur GitHub Pages sans backend.
+La maquette `design/reference-interface-validee.jpg`, les douze PNG dans `assets/characters/` et le GIF sont des **références disponibles**, pas un contrat graphique impératif. Prioriser l'utilisation réelle plutôt que la fidélité pixel à pixel.
+
+Les autres assistants ne doivent pas lancer des agents indépendants, déclencher des appels payants à des API ou consommer des quotas Codex/Claude sur la seule base de cette documentation ; les lancements restent à autoriser par le porteur. Les revues multi-expertises dans ChatGPT sont des perspectives analytiques, pas cinq agents autonomes.
 
 # AGENTS.md — règles de reprise du projet Neuro Bob+
 
@@ -23,7 +31,7 @@ Dans le workflow Pages, toujours publier le dossier complet `assets/`, sinon les
 - Les messages restent éphémères tant que la politique de données n'a pas été arbitrée.
 - Avant d'ajouter du stockage ou un service externe, documenter les données, le consentement, le traitement et les risques.
 - Pour les prochaines fonctionnalités, proposer les tests, les critères d'acceptation, les décisions à prendre.
-- Respecter les libellés, la structure et la direction artistique de la maquette, tout en améliorant ses défauts.
+- Prioriser les objectifs utilisateurs et la compréhension mutuelle ; conserver les assets utiles, sans imposer la composition de la maquette antérieure.
 
 ## À tester avant publication
 - Navigation complète clavier, lecteurs d'écran, contrastes, zoom et réduction des animations.
