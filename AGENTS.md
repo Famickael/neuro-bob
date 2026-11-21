@@ -1,3 +1,11 @@
+## Direction artistique impérative
+
+La référence graphique du propriétaire du projet est **`design/reference-interface-validee.jpg`**. Avant de redessiner l'accueil, comparez-le à cette image : sidebar bleue, robot 3D clair au centre, colonne droite « Ma mission / Outils pratiques / Nos engagements », cinq cartes pastel, boutons de thèmes, trois cartes finales. Le propriétaire a demandé une restitution nettement plus fidèle que le premier prototype.
+
+Les **12 personnages séparés** se trouvent dans `assets/characters/*.png` (512×512, fonds transparents), décrits par `assets/characters/manifest.json`. Utilisez-les plutôt que de redessiner arbitrairement un autre robot. L'animation de concept est `assets/neuro-bob-idee.gif`.
+
+Dans le workflow Pages, toujours publier le dossier complet `assets/`, sinon les illustrations manqueront malgré leur présence sur GitHub. Le mode Claude ne peut pas fonctionner sur GitHub Pages sans backend.
+
 # AGENTS.md — règles de reprise du projet Neuro Bob+
 
 ## Contexte prioritaire
