@@ -60,37 +60,98 @@
       </header>
 
       <main id="main-content" tabindex="-1">
-        <section class="page" data-page="accueil" aria-labelledby="welcome-title">
-          <div class="hero">
-            <div class="hero-copy"><p class="eyebrow"><span class="mini-star">✳</span> BIENVENUE DANS UN ESPACE POUR TOUS</p>
-              <h1 id="welcome-title">Bonjour ! <span class="greeting-spark" aria-hidden="true">✴</span><br><span class="thin">Je suis</span> <span class="brand-gradient">Neuro Bob+</span></h1>
-              <p class="hero-lead">Et si on apprenait à <strong>mieux se comprendre ?</strong></p>
-              <p class="hero-description">Je vous aide à décoder les comportements, à comprendre les différences de fonctionnement et à trouver des pistes concrètes pour mieux vivre et travailler ensemble.</p>
-              <div class="hero-pills"><span><svg><use href="#i-heart"></use></svg>Sans jugement</span><span><svg><use href="#i-people"></use></svg>Pour toutes et tous</span></div>
-            </div>
-            <div class="hero-art" aria-hidden="true"><div class="hero-blob"></div><img src="./assets/neuro-bob.svg" alt="" width="430" height="420"><span class="hero-doodle doodle-1">✦</span><span class="hero-doodle doodle-2">✳</span></div>
-          </div>
+        <section class="page page-home" data-page="accueil" aria-labelledby="welcome-title">
+  <div class="home-dashboard">
+    <div class="home-core">
+      <div class="dash-hero">
+        <div class="dash-hero-copy">
+          <h1 id="welcome-title">Bonjour ! <span class="hello-rays" aria-hidden="true">✴</span><br><span class="hero-normal">Je suis</span> <span class="brand-gradient">Neuro Bob +</span></h1>
+          <p class="dash-lead">L’agent IA spécialiste de la neurodiversité.</p>
+          <p class="dash-description">Je réponds à vos questions sur les fonctionnements neurotypiques et neuroatypiques, et sur la vie au travail, pour mieux comprendre, accompagner et agir.</p>
+        </div>
+        <div class="dash-hero-illustration" aria-hidden="true">
+          <div class="dash-hero-blob"></div><img src="./assets/characters/01-salut.png" alt="" width="350" height="350"><i class="spark-a"></i><i class="spark-b"></i><i class="spark-c"></i>
+        </div>
+      </div>
 
-          <form id="quick-form" class="quick-form" autocomplete="off">
-            <label for="quick-question" class="sr-only">Poser une question à Neuro Bob+</label>
-            <svg class="quick-spark"><use href="#i-spark"></use></svg>
-            <input id="quick-question" name="question" placeholder="Posez-moi votre question, même celle que vous n'osez pas poser…" maxlength="2500" required>
-            <button type="submit" class="send-button" aria-label="Poser ma question"><svg><use href="#i-send"></use></svg></button>
-          </form>
-          <div class="section-heading perspective-heading"><div><p class="eyebrow">DEUX REGARDS, UNE MÊME CURIOSITÉ</p><h2>Comprendre l'autre, dans les deux sens.</h2><p>Choisissez un sujet, pas une étiquette : ces parcours sont ouverts à tout le monde.</p></div></div>
-          <div class="perspectives">
-            <button class="perspective-card atypique" data-topic="atypiques"><span class="perspective-icon"><svg><use href="#i-spark"></use></svg></span><span class="perspective-text"><span class="card-kicker">PREMIER REGARD</span><strong>Comprendre les fonctionnements neuroatypiques</strong><small>Explorer les besoins, les perceptions et les modes de communication de personnes neuroatypiques.</small></span><span class="circle-arrow"><svg><use href="#i-arrow"></use></svg></span></button>
-            <button class="perspective-card typique" data-topic="typiques"><span class="perspective-icon"><svg><use href="#i-people"></use></svg></span><span class="perspective-text"><span class="card-kicker">AUTRE REGARD, TOUT AUSSI IMPORTANT</span><strong>Décoder les codes et comportements neurotypiques</strong><small>Comprendre les sous-entendus, les attentes implicites et certaines conventions sociales.</small></span><span class="circle-arrow"><svg><use href="#i-arrow"></use></svg></span></button>
-          </div>
-          <div class="section-heading examples-heading"><div><p class="eyebrow">ON COMMENCE ?</p><h2>Quelques situations pour lancer la discussion</h2></div><button class="text-link" data-view="explorer">Tout explorer <svg><use href="#i-arrow"></use></svg></button></div>
-          <div class="scenario-grid">
-            <button class="scenario-card card-blue" data-prompt="Pourquoi les sous-entendus sont-ils si fréquents dans certaines conversations au travail ? Comment les décoder sans deviner ?"><span class="scenario-emoji">💬</span><strong>Décoder les sous-entendus</strong><small>Comprendre l'implicite sans devoir lire dans les pensées.</small><svg><use href="#i-arrow"></use></svg></button>
-            <button class="scenario-card card-green" data-prompt="Comment rendre une réunion plus inclusive pour des besoins de concentration, de rythme ou de communication différents ?"><span class="scenario-emoji">🌿</span><strong>Une réunion pour chacun</strong><small>Adapter les échanges sans présumer des besoins.</small><svg><use href="#i-arrow"></use></svg></button>
-            <button class="scenario-card card-purple" data-prompt="Comment exprimer un besoin d'aménagement au travail sans être obligé de révéler un diagnostic ?"><span class="scenario-emoji">✨</span><strong>Exprimer ses besoins</strong><small>Oser demander des ajustements sans se justifier.</small><svg><use href="#i-arrow"></use></svg></button>
-            <button class="scenario-card card-peach" data-prompt="Comment réagir face à un malentendu entre collègues sans supposer que l'un des deux a tort ?"><span class="scenario-emoji">🤝</span><strong>Sortir d'un malentendu</strong><small>Faire dialoguer différentes façons de fonctionner.</small><svg><use href="#i-arrow"></use></svg></button>
-          </div>
-          <div class="home-bottom"><div class="bottom-copy"><div class="bottom-icon"><svg><use href="#i-shield"></use></svg></div><div><strong>Un espace pour poser des questions librement.</strong><p>Aucun compte ni diagnostic n'est requis. En mode démo, vos messages restent dans cet onglet. En mode Claude, leur contenu est envoyé à Anthropic après votre accord.</p></div></div><button class="bottom-button" data-view="apropos">Notre démarche <svg><use href="#i-arrow"></use></svg></button></div>
-        </section>
+      <form id="quick-form" class="quick-form dash-question" autocomplete="off">
+        <svg class="quick-spark"><use href="#i-spark"></use></svg>
+        <label class="sr-only" for="quick-question">Poser une question à Neuro Bob+</label>
+        <input id="quick-question" name="question" placeholder="Posez votre question (ex. : « Comment mieux communiquer avec mon équipe ? »)" required maxlength="2500">
+        <button type="submit" class="send-button" aria-label="Poser ma question"><svg><use href="#i-send"></use></svg></button>
+      </form>
+
+      <div class="dash-feature-grid" aria-label="Les principaux usages de Neuro Bob+">
+        <button type="button" class="dash-feature dash-feature-blue" data-topic="atypiques">
+          <span class="dash-feature-icon">🧠</span><strong>Comprendre la neurodiversité</strong><small>Repères, définitions et idées reçues</small><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-feature dash-feature-green" data-prompt="Comment mieux accompagner une personne neuroatypique au quotidien ou au travail, sans stéréotypes ?">
+          <span class="dash-feature-icon">♧</span><strong>Accompagner une personne neuroatypique</strong><small>Au travail, au quotidien</small><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-feature dash-feature-purple" data-prompt="Quels aménagements et outils concrets peuvent faciliter les échanges et les conditions de travail pour différents besoins ?">
+          <span class="dash-feature-icon">♢</span><strong>Aménager et faciliter les conditions</strong><small>Outils, solutions et bonnes pratiques</small><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-feature dash-feature-orange" data-prompt="Comment gérer une situation difficile ou un malentendu lié à des styles de communication différents au travail ?">
+          <span class="dash-feature-icon">⚙</span><strong>Gérer des situations et des comportements</strong><small>Exemples concrets, outils de communication</small><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-feature dash-feature-teal" data-topic="typiques">
+          <span class="dash-feature-icon">♧</span><strong>Comprendre les comportements neurotypiques</strong><small>Mieux se comprendre et collaborer</small><span class="dash-feature-arrow">›</span>
+        </button>
+      </div>
+
+      <section class="dash-topic-section" aria-labelledby="theme-title">
+        <h2 id="theme-title"><span class="tiny-bars" aria-hidden="true">▂▅▇</span>Explorer par profils et thématiques</h2>
+        <div class="dash-topic-chips">
+          <button type="button" data-prompt="Quels repères et adaptations possibles autour du TDAH au travail ?">◎ <span>TDAH</span> <span>›</span></button>
+          <button type="button" data-prompt="Quels repères pour comprendre l'autisme sans stéréotypes et faciliter les échanges ?">∞ <span>TSA (autisme)</span> <span>›</span></button>
+          <button type="button" data-prompt="Quels repères pratiques sur les troubles DYS et les documents accessibles ?">▤ <span>DYS</span> <span>›</span></button>
+          <button type="button" data-prompt="Que recouvre le HPI et quelles idées reçues faut-il éviter ?">✧ <span>HPI</span> <span>›</span></button>
+          <button type="button" data-view="ressources">♿ <span>Accessibilité</span> <span>›</span></button>
+          <button type="button" data-view="explorer">••• <span>Autres thèmes</span> <span>›</span></button>
+        </div>
+      </section>
+
+      <div class="dash-actions" aria-label="En savoir plus sur le projet">
+        <button type="button" class="dash-action action-indigo" data-view="discuter">
+          <span class="action-icon">▣</span><span><strong>Usages de l'agent IA</strong><small>Collaborateurs, managers, RH et publics externes : des questions à explorer.</small></span><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-action action-green" data-open-settings>
+          <span class="action-icon">♢</span><span><strong>Accessibilité et confort</strong><small>Moins de sollicitations, lecture vocale et modes personnalisés.</small></span><span class="dash-feature-arrow">›</span>
+        </button>
+        <button type="button" class="dash-action action-pink" data-view="apropos">
+          <span class="action-icon">◎</span><span><strong>Mettre en place un projet</strong><small>Sensibiliser, expérimenter et faire progresser les pratiques.</small></span><span class="dash-feature-arrow">›</span>
+        </button>
+      </div>
+    </div>
+
+    <aside class="dash-right" aria-label="Informations et outils Neuro Bob+">
+      <section class="dash-info-panel dash-mission">
+        <h2><span class="sidepanel-icon">◎</span>Ma mission</h2>
+        <p>Vous apporter des réponses claires, accessibles et nuancées sur la neurodiversité, pour mieux comprendre, accompagner et favoriser l’inclusion.</p>
+        <span class="dash-corner-yellow" aria-hidden="true"></span>
+      </section>
+
+      <section class="dash-info-panel dash-tools">
+        <h2><span class="sidepanel-icon">▣</span>Outils pratiques</h2>
+        <button type="button" data-view="explorer"><span>▤</span>Fiches repères <b>›</b></button>
+        <button type="button" data-prompt="Peux-tu me proposer une checklist de préparation d'une réunion inclusive ?"><span>☑</span>Guides et check-lists <b>›</b></button>
+        <button type="button" data-prompt="Comment animer un atelier de sensibilisation à la compréhension mutuelle neurotypique et neuroatypique ?"><span>♧</span>Ateliers et sensibilisation <b>›</b></button>
+        <button type="button" data-view="ressources"><span>▱</span>Modèles et ressources <b>›</b></button>
+      </section>
+
+      <section class="dash-info-panel dash-commitments">
+        <h2><span class="sidepanel-icon">♧</span>Nos engagements</h2>
+        <ul>
+          <li><span>✓</span>Approche inclusive, sans diagnostic</li>
+          <li><span>✓</span>Vie privée prise en compte</li>
+          <li><span>✓</span>Accessibilité à améliorer et tester</li>
+          <li><span>✓</span>Usage éthique et responsable de l’IA</li>
+        </ul>
+        <p class="panel-footnote">Prototype à évaluer : les contenus et la conformité ne sont pas encore certifiés.</p>
+      </section>
+    </aside>
+  </div>
+</section>
 
         <section class="page" data-page="discuter" hidden aria-labelledby="chat-title">
           <div class="page-heading"><p class="eyebrow">UNE CONVERSATION SANS ÉTIQUETTE</p><h1 id="chat-title">Discutons, simplement. <span>✳</span></h1><p>Une question, un doute, une situation compliquée ? Bob vous aide à explorer des pistes, sans diagnostic ni jugement.</p></div>
