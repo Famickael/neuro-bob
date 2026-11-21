@@ -29,9 +29,10 @@ jobs:
 
       - name: Préparer les fichiers publics
         run: |
-          mkdir -p public/assets
+          mkdir -p public
           cp index.html styles.css app.js public/
-          cp assets/neuro-bob.svg assets/favicon.svg public/assets/
+          cp -R assets public/
+          cp -R design public/
           touch public/.nojekyll
 
       - name: Charger le site statique
