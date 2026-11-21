@@ -1,3 +1,17 @@
+## ORIENTATION V3 — décision produit la plus récente (21 novembre 2026)
+
+**Lire d'abord :**
+1. `docs/PRODUCT_DEFINITION_V3.md` — plateforme de contenus ET agent IA, explications neurocognitives, profils facultatifs, cas manager avec ou sans diagnostic connu ;
+2. `docs/EDITORIAL_PLATFORM.md` — architecture des fiches, articles, sources, statuts et validations ;
+3. `docs/CONCEPT.md` — observations de l'atelier ;
+4. `docs/PRODUCT_ROADMAP.md`, `docs/EVALUATION_PLAN.md` et `docs/AI_BEHAVIOR_POLICY.md` — plan, tests et limites.
+
+**Ne pas interpréter la V2 comme une interdiction d'expliquer les comportements ou de formuler des hypothèses neurocognitives.** Bob doit répondre utilement et directement aux questions sur un collaborateur, en présentant les mécanismes plausibles (et les autres causes) sans inférer un diagnostic, une émotion ou une aptitude personnelle.
+
+La **Bibliothèque est une composante centrale**, et non un catalogue secondaire : `editorial.js` contient les fiches de démonstration, chaque article doit fournir son statut, ses sources, leurs limites et des possibilités d'approfondissement. `index.html`, `app.js` et la publication GitHub Pages doivent conserver cette page.
+
+Ne pas figer le design. Ne pas exposer de clé. Ne pas lancer Codex, Claude ou un fournisseur facturé sans nouvelle autorisation explicite. Lors d'une continuation autonome, privilégier les modifications documentaires et les corrections réversibles ; ne pas prétendre qu'une conception a été validée par des experts ou des utilisateurs.
+
 ## PRIORITÉ PRODUIT — décision du porteur du projet, 21 novembre 2026
 
 **Ne pas figer l'interface sur une ancienne image.** Le propriétaire du projet privilégie maintenant les objectifs, la valeur utilisateur, la compréhension réciproque, la fiabilité des contenus, l'inclusion et l'évaluation. Les choix UI/UX peuvent évoluer, y compris sensiblement, lorsqu'ils sont argumentés par les besoins et les tests.
