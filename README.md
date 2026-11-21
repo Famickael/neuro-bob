@@ -1,11 +1,24 @@
 # Neuro Bob+ 🤖
 
-**Un assistant pour mieux comprendre les fonctionnements neurotypiques et neuroatypiques — dans les deux sens.**
+**Une plateforme de contenus et un agent IA dédiés à la neurodiversité, aux explications neurocognitives et à la compréhension réciproque.**
 
 Neuro Bob+ est une **maquette interactive** d'agent IA sur la neurodiversité, les comportements et les situations professionnelles. Le projet est issu d'un atelier de prototypage dont les observations et questions sont documentées dans [docs/CONCEPT.md](docs/CONCEPT.md).
 
-> **V0.1 — Prototype d'expérimentation, pas service de production.**
+> **V0.2 — Prototype d'expérimentation, pas service de production.**
 > L'interface et le mode démonstration fonctionnent sans clé. Le mode Claude nécessite une configuration serveur et des contrôles supplémentaires avant une mise à disposition publique.
+
+## Nouveau cadrage produit — 21 novembre 2026
+
+La dernière orientation du porteur est décrite dans [**PRODUCT_DEFINITION_V3.md**](docs/PRODUCT_DEFINITION_V3.md) et [**EDITORIAL_PLATFORM.md**](docs/EDITORIAL_PLATFORM.md). Elle **remplace** la restriction excessive de la V2 à de simples conseils de communication.
+
+- **Une plateforme éditoriale autonome :** Bibliothèque avec six contenus illustratifs (TDAH, autisme, DYS, conventions neurotypiques, cas de management et aménagements).
+- **Un agent explicatif :** il formule des hypothèses neurocognitives et contextuelles sans diagnostiquer ; il répond directement aux managers y compris quand un TND n'est pas connu.
+- **Trois entrées facultatives :** « je suis neurotypique », « je suis neuroatypique », « je préfère explorer librement ». Aucune classification ni diagnostic n'en découle.
+- **Précautions proportionnées :** ne pas noyer les réponses dans les avertissements, sans abaisser les garde-fous sur les données de tiers.
+- **Navigation :** une Bibliothèque consultable sans connexion à un fournisseur d'IA et une section « Outils & ressources » distincte.
+- **Statut des articles :** démonstration documentée, non validée par un comité scientifique.
+
+Le site GitHub Pages reste statique. Le mode Claude exige un backend indépendant et une analyse de sécurité/confidentialité avant toute ouverture publique.
 
 ## Direction produit — revue du 21 novembre 2026
 
