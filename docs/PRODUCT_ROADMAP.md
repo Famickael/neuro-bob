@@ -1,3 +1,19 @@
+## MISE À JOUR V3 — plate-forme de contenus et explication neurocognitive (21 novembre 2026)
+
+Cette section **prévaut sur les priorités contraires formulées ci-dessous**. Elle prend en compte les corrections du porteur.
+
+**P0 immédiat :** bibliothèque exploitable sans IA, corpus d'articles sourcés à valider, accueil avec chemins facultatifs neurotypique/neuroatypique/libre, démonstration managériale proposant des hypothèses neurocognitives et environnementales, pas de diagnostic inféré.
+
+**P1 :** gouvernance éditoriale (rédacteurs, spécialistes, relecteurs concernés, versions, sources), moteur de recherche documentaire et lien traçable entre réponses de l'IA et sources disponibles ; tests de la pertinence des explications et des limites de leur application.
+
+**P2 :** formats multimédias, parcours pédagogiques, outils RH de compréhension des situations, intégration d'IA sécurisée avec limites de coûts.
+
+Éviter les avertissements génériques répétitifs, **sans abaisser la confidentialité ou la rigueur** selon le profil déclaré par la personne. Conserver les deux directions de compréhension.
+
+Références : [PRODUCT_DEFINITION_V3.md](PRODUCT_DEFINITION_V3.md) et [EDITORIAL_PLATFORM.md](EDITORIAL_PLATFORM.md).
+
+---
+
 # Neuro Bob+ — Feuille de route fondée sur la valeur d'usage
 
 **Version :** 0.1, 21 novembre 2026  
