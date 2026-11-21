@@ -314,6 +314,8 @@ function initialize() {
   document.addEventListener("click",event=>{
     const settingsLink=event.target.closest("[data-open-settings]");
     if(settingsLink) { $("#settings-dialog").showModal(); return; }
+    if(event.target.closest("[data-ask-direct]")) { navigate("discuter",false); $("#chat-input").focus(); return; }
+    if(event.target.closest("[data-explore-profile]")) { navigate("explorer",false); $("#explore-search").focus(); return; }
     const nav=event.target.closest("[data-view]");
     if(nav) { navigate(nav.dataset.view);return; }
     const prompt=event.target.closest("[data-prompt]");
