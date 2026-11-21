@@ -46,7 +46,8 @@
         <button class="nav-button" data-ask-direct><svg><use href="#i-info"></use></svg>Poser une question</button>
         <button class="nav-button" data-view="explorer"><svg><use href="#i-compass"></use></svg>Explorer les réponses</button>
         <button class="nav-button" data-explore-profile><svg><use href="#i-people"></use></svg>Profils &amp; particularités</button>
-        <button class="nav-button" data-view="ressources"><svg><use href="#i-book"></use></svg>Ressources</button>
+        <button class="nav-button" data-view="bibliotheque"><svg><use href="#i-book"></use></svg>Bibliothèque</button>
+        <button class="nav-button" data-view="ressources"><svg><use href="#i-compass"></use></svg>Outils &amp; ressources</button>
       </nav>
       <div class="side-spacer"></div>
       <div class="sidebar-note"><span class="note-orb">✦</span><strong>Chaque fonctionnement mérite d'être compris.</strong><span>Sans étiquette ni jugement.</span></div>
@@ -101,6 +102,19 @@
         </button>
       </div>
 
+      <section class="entry-pathways" aria-labelledby="pathways-title">
+        <div class="entry-heading">
+          <div><p class="eyebrow">VOTRE POINT DE DÉPART</p><h2 id="pathways-title">Bob s'adapte à ce que vous cherchez.</h2></div>
+          <button type="button" class="text-link" data-view="bibliotheque">Explorer les contenus <svg><use href="#i-arrow"></use></svg></button>
+        </div>
+        <p>Ces entrées sont facultatives et modifiables. Elles ne servent pas à déterminer votre profil.</p>
+        <div class="entry-grid">
+          <button type="button" data-prompt="Je suis neurotypique et je souhaite mieux comprendre la neurodiversité et les comportements possibles d'une personne avec qui je travaille. Aide-moi avec des explications neurocognitives et des solutions pratiques."><strong>Je suis neurotypique</strong><small>Comprendre, accompagner, manager</small></button>
+          <button type="button" data-prompt="Je suis neuroatypique. Aide-moi à mieux comprendre mon fonctionnement, à décoder les conventions neurotypiques et à identifier des stratégies adaptées à mes besoins."><strong>Je suis neuroatypique</strong><small>Décoder, comprendre, agir</small></button>
+          <button type="button" data-view="bibliotheque"><strong>Je préfère explorer librement</strong><small>Accéder aux connaissances sans me définir</small></button>
+        </div>
+      </section>
+
       <section class="dash-topic-section" aria-labelledby="theme-title">
         <h2 id="theme-title"><span class="tiny-bars" aria-hidden="true">▂▅▇</span>Explorer par profils et thématiques</h2>
         <div class="dash-topic-chips">
@@ -135,7 +149,7 @@
 
       <section class="dash-info-panel dash-tools">
         <h2><span class="sidepanel-icon">▣</span>Outils pratiques</h2>
-        <button type="button" data-view="explorer"><span>▤</span>Fiches repères <b>›</b></button>
+        <button type="button" data-view="bibliotheque"><span>▤</span>Articles et fiches documentées <b>›</b></button>
         <button type="button" data-prompt="Peux-tu me proposer une checklist de préparation d'une réunion inclusive ?"><span>☑</span>Guides et check-lists <b>›</b></button>
         <button type="button" data-prompt="Comment animer un atelier de sensibilisation à la compréhension mutuelle neurotypique et neuroatypique ?"><span>♧</span>Ateliers et sensibilisation <b>›</b></button>
         <button type="button" data-view="ressources"><span>▱</span>Modèles et ressources <b>›</b></button>
@@ -177,6 +191,21 @@
           <div class="filter-wrap"><label class="search-field"><svg><use href="#i-search"></use></svg><span class="sr-only">Rechercher parmi les sujets</span><input id="explore-search" type="search" placeholder="Rechercher : communication, DYS, aménagements, etc."></label><div class="filter-pills" aria-label="Filtrer les fiches"><button class="filter-pill is-selected" data-filter="tout" aria-pressed="true">Tous les sujets</button><button class="filter-pill" data-filter="decodage" aria-pressed="false">Comprendre l'autre</button><button class="filter-pill" data-filter="travail" aria-pressed="false">Au travail</button><button class="filter-pill" data-filter="reperes" aria-pressed="false">Repères</button></div></div>
           <div id="resource-grid" class="resource-grid" aria-live="polite"></div>
           <p class="explore-disclaimer"><svg><use href="#i-info"></use></svg>Ces fiches sont des contenus exploratoires pour la maquette, et non une base documentaire expertisée. Elles doivent être vérifiées avant un déploiement.</p>
+        </section>
+
+        <section class="page" data-page="bibliotheque" hidden aria-labelledby="library-title">
+          <div class="page-heading library-intro">
+            <p class="eyebrow">UNE PLATEFORME DE CONNAISSANCES</p>
+            <h1 id="library-title">Comprendre, approfondir, agir. <span>✳</span></h1>
+            <p>Des explications sur les fonctions neurocognitives, des décryptages de comportements et des cas professionnels. Les contenus sont consultables sans IA.</p>
+          </div>
+          <div class="library-notice"><svg><use href="#i-info"></use></svg><p><strong>Bibliothèque de démonstration :</strong> sources externes réelles, textes éditoriaux à relire et à valider. Les mécanismes décrits ne constituent jamais un diagnostic individuel.</p></div>
+          <div class="library-controls">
+            <label class="search-field"><svg><use href="#i-search"></use></svg><span class="sr-only">Rechercher des articles et fiches</span><input id="library-search" type="search" placeholder="Rechercher : TDAH, comportements, manager, DYS, etc."></label>
+            <div id="library-filters" class="filter-pills" aria-label="Filtrer la bibliothèque"></div>
+          </div>
+          <div id="library-grid" class="library-grid" aria-live="polite"></div>
+          <p class="explore-disclaimer"><svg><use href="#i-info"></use></svg>Ces publications constituent un prototype éditorial. Leur relecture scientifique, juridique et par les utilisateurs reste à organiser avant la production.</p>
         </section>
 
         <section class="page" data-page="ressources" hidden aria-labelledby="resources-title"><div class="page-heading"><p class="eyebrow">DES REPÈRES CONCRETS</p><h1 id="resources-title">Les ressources pour aller plus loin. <span>✳</span></h1><p>Un premier espace documentaire à enrichir avec des sources datées, relues et accessibles.</p></div><div class="resource-columns">
@@ -221,6 +250,14 @@
   </dialog>
 
   <dialog id="topic-dialog" class="topic-dialog" aria-labelledby="topic-title"><div class="modal-heading"><div><p id="topic-tag" class="eyebrow"></p><h2 id="topic-title"></h2></div><button class="icon-btn" id="close-topic" aria-label="Fermer la fiche"><svg><use href="#i-close"></use></svg></button></div><p id="topic-description" class="topic-description"></p><h3>Quelques pistes à explorer</h3><ul id="topic-points"></ul><button id="ask-topic" class="primary-button">En parler avec Bob <svg><use href="#i-arrow"></use></svg></button><p class="topic-footnote">Contenu de démonstration à documenter et valider.</p></dialog>
+  <dialog id="editorial-dialog" class="editorial-dialog" aria-labelledby="editorial-title">
+    <div class="modal-heading"><div><p id="editorial-type" class="eyebrow">BIBLIOTHÈQUE</p><h2 id="editorial-title"></h2></div><button class="icon-btn" id="editorial-close" aria-label="Fermer l'article"><svg><use href="#i-close"></use></svg></button></div>
+    <p id="editorial-abstract" class="editorial-abstract"></p>
+    <p class="editorial-status">Contenu de démonstration documenté — en attente de validation éditoriale.</p>
+    <div id="editorial-sections" class="editorial-sections"></div>
+    <section class="editorial-sources" aria-labelledby="editorial-sources-title"><h3 id="editorial-sources-title">Sources et limites</h3><div id="editorial-sources-list"></div></section>
+    <div class="editorial-actions"><button type="button" id="editorial-ask" class="primary-button">Approfondir avec Bob <svg><use href="#i-arrow"></use></svg></button><button type="button" id="editorial-done" class="quiet-button">Fermer</button></div>
+  </dialog>
   <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 </body>
 </html>
