@@ -304,6 +304,16 @@ function applySettings() {
   try { localStorage.setItem("neuro-bob-display",JSON.stringify(controls)); } catch {}
 }
 function initialize() {
+  // GitHub Pages est un hébergement statique : ne pas promettre un chat IA qui ne peut pas répondre.
+  if (window.location.hostname.endsWith(".github.io")) {
+    const onlineButton = $("#select-claude");
+    onlineButton.disabled = true;
+    onlineButton.setAttribute("aria-disabled", "true");
+    onlineButton.title = "Le modèle Claude nécessite un backend séparé, non disponible sur GitHub Pages.";
+    onlineButton.textContent = "✦ Claude — indisponible sur cette démo";
+    $("#demo-disclosure").textContent =
+      "Cette démonstration utilise des réponses scénarisées, pas une IA générative. Le mode Claude nécessite un serveur sécurisé distinct de GitHub Pages.";
+  }
   const preferences=loadSettings();
   $("#setting-large").checked=preferences.large;
   $("#setting-contrast").checked=preferences.contrast;
