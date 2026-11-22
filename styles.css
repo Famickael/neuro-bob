@@ -499,8 +499,6 @@ html.simple-mode .dash-feature,html.simple-mode .dash-action { background:#fff; 
 
 /* Maquette : distinguer les ébauches des fiches documentées */
 .library-count { margin:.2rem 0 .8rem; color:#4f5d75; font-size:.85rem; }
-.library-card.is-draft { border-style:dashed; background:#fbfcff; }
-.library-card.is-draft .library-card-status { color:#8a4b00; font-weight:600; }
 .positioning-band { display:flex; gap:.6rem; align-items:flex-start; margin:0 0 1rem; padding:.75rem 1rem; border-radius:14px; background:#eef4ff; color:#1f2a44; font-size:.9rem; line-height:1.45; }
 .positioning-band strong { white-space:nowrap; }
 .positioning-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:1.5rem 0; }

@@ -347,25 +347,23 @@ function renderLibrary() {
   });
   const count=$("#library-count");
   if(count) {
-    const drafts=filtered.filter(a=>a.status==="ebauche").length;
-    count.textContent=filtered.length+" contenu"+(filtered.length>1?"s":"")+" · "+(filtered.length-drafts)+" documenté"+(filtered.length-drafts>1?"s":"")+", "+drafts+" ébauche"+(drafts>1?"s":"")+" de maquette";
+    count.textContent=filtered.length+" contenu"+(filtered.length>1?"s":"");
   }
   if(!filtered.length) {
     grid.append(libraryNode("p","Aucun contenu ne correspond à cette recherche. Essayez un autre terme.","no-results"));
     return;
   }
   for(const article of filtered) {
-    const draft=article.status==="ebauche";
-    const b=libraryNode("button",null,"library-card"+(draft?" is-draft":""));
+    const b=libraryNode("button",null,"library-card");
     b.type="button";
     b.setAttribute("aria-label","Lire : "+article.title);
     b.append(
       libraryNode("span",article.icon,"library-emoji"),
-      libraryNode("span",article.format+(draft?"":" · "+article.readingMinutes+" min"),"library-category"),
+      libraryNode("span",article.format+" · "+article.readingMinutes+" min","library-category"),
       libraryNode("strong",article.title),
       libraryNode("span",article.abstract,"library-summary"),
-      libraryNode("span",draft?"Ébauche · Contenu à rédiger":"Démonstration documentée · À valider","library-card-status"),
-      libraryNode("span",draft?"Voir le sommaire prévu →":"Lire le contenu →","library-more")
+      libraryNode("span",article.sources.length?"Sources citées · Relecture experte à venir":"Relecture et sources à compléter","library-card-status"),
+      libraryNode("span","Lire →","library-more")
     );
     b.addEventListener("click",()=>openEditorial(article.id));
     grid.append(b);
@@ -376,9 +374,8 @@ function openEditorial(id) {
   if(!a)return;
   currentArticle=a;
   $("#editorial-title").textContent=a.title;
-  const draft=a.status==="ebauche";
-  $("#editorial-type").textContent=a.format+(draft?" · Ébauche":" · "+a.readingMinutes+" min de lecture");
-  $("#editorial-status").textContent=draft?"Ébauche de maquette — seul le sommaire est prévu ; le contenu reste à rédiger et à valider.":"Contenu de démonstration documenté — en attente de validation éditoriale.";
+  $("#editorial-type").textContent=a.format+" · "+a.readingMinutes+" min de lecture";
+  $("#editorial-status").textContent=a.status==="demo"?"Fiche documentée — en attente de relecture par des experts et des personnes concernées.":"Contenu d'information générale — relecture par des experts et des personnes concernées à venir.";
   $("#editorial-abstract").textContent=a.abstract;
   const sections=$("#editorial-sections"); sections.replaceChildren();
   for(const item of a.sections){
@@ -387,8 +384,8 @@ function openEditorial(id) {
     sections.append(section);
   }
   const sources=$("#editorial-sources-list");sources.replaceChildren();
-  if(draft) {
-    sources.append(libraryNode("p","Sources à sélectionner lors de la rédaction (institutions de santé, recherche, associations de personnes concernées), avec leur date et leurs limites."));
+  if(a.sources.length===0 && a.status!=="demo") {
+    sources.append(libraryNode("p","Sources à compléter lors de la relecture (institutions de santé, recherche, associations de personnes concernées), avec leur date et leurs limites."));
   } else if(a.sources.length===0) {
     sources.append(libraryNode("p","Cette fiche est un exemple d'explication contextualisée. Aucune source académique particulière n'est revendiquée pour ces illustrations de langage. La validation éditoriale reste à réaliser."));
   } else {

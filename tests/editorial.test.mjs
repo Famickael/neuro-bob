@@ -5,16 +5,17 @@ import { editorialArticles, editorialCategories } from "../editorial.js";
 
 test("six fiches documentées, des ébauches, des identifiants uniques",()=>{
   assert.equal(editorialArticles.filter(a=>a.status==="demo").length,6);
-  assert.ok(editorialArticles.filter(a=>a.status==="ebauche").length>=20);
-  for(const a of editorialArticles) assert.ok(["demo","ebauche"].includes(a.status),a.id);
+  assert.ok(editorialArticles.filter(a=>a.status==="redige").length>=20);
+  for(const a of editorialArticles) assert.ok(["demo","redige"].includes(a.status),a.id);
+  for(const a of editorialArticles) assert.ok(Number.isFinite(a.readingMinutes),a.id);
   assert.equal(new Set(editorialArticles.map(a=>a.id)).size,editorialArticles.length);
 });
 test("toutes les familles DYS et les principales neurodivergences ont une fiche",()=>{
   const ids=new Set(editorialArticles.map(a=>a.id));
   for(const id of ["tdah-reperes","autisme-sensorialite","dyslexie","dysorthographie","dysgraphie","dyscalculie","dyspraxie","dysphasie","hpi","tourette-tics","tdi"]) assert.ok(ids.has(id),id);
 });
-test("une ébauche ne revendique aucune source",()=>{
-  for(const a of editorialArticles.filter(a=>a.status==="ebauche")) assert.equal(a.sources.length,0,a.id);
+test("chaque contenu rédigé a au moins trois sections",()=>{
+  for(const a of editorialArticles.filter(a=>a.status==="redige")) assert.ok(a.sections.length>=3,a.id);
 });
 test("bibliothèque : métadonnées et sources exploitables",()=>{
   const allowed=new Set(editorialCategories.map(c=>c.id));
