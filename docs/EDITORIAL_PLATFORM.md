@@ -93,3 +93,16 @@ Les six premières fiches restent affichées comme **contenus de démonstration*
 - Un utilisateur peut lire l'article **sans solliciter une API externe**.
 - Depuis un contenu, possibilité de « poser une question à Bob », sans envoyer l'article au fournisseur externe à l'insu de l'utilisateur.
 - Les parcours peuvent être adaptés par choix explicite de l'utilisateur, sans mécanisme de profilage caché.
+
+## 7. Proposition du 22 novembre 2026 — liens directs par fiche
+
+Une première proposition technique permet de partager une fiche via une URL du type `?article=manager-priorites`, sans compte ni appel IA. Un lien « Lien direct vers cette fiche » est présent dans la fenêtre de lecture ; ouvrir ce lien dans un nouvel onglet mène à la Bibliothèque avec la fiche affichée. Un identifiant inconnu ne doit ni planter l'application ni ouvrir une fiche arbitraire.
+
+**Valeur :** diffuser des ressources dans un intranet, une formation ou un parcours de sensibilisation, sans obliger les salariés à ouvrir une conversation.
+
+**Limites / arbitrages pour Claude :**
+- Ce sont des URL de démonstration, **pas** des URL de production ni des garanties de pérennité. La future instance interne en marque blanche devra gérer son domaine et ses droits d'accès.
+- L'URL contient uniquement l'identifiant public de la fiche, jamais de donnée de santé, d'identité ni de conversation.
+- Le prototype utilise une fenêtre modale ; évaluer ultérieurement une vraie page dédiée pour le référencement interne, le retour navigateur, les ancres de section et l'accessibilité.
+- Les tests ajoutés sont des vérifications de structure du code ; un test de navigation réel, au clavier et au lecteur d'écran, reste nécessaire.
+- Aucun contenu n'est promu au statut « vérifié » par cette modification.

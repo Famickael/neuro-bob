@@ -56,3 +56,13 @@ test("API : le mode est une liste fermée, pas une chaîne libre",()=>{
   assert.match(js,/MODES\.includes\(body\.mode\)/);
   assert.doesNotMatch(js,/body\.mode\.slice/);
 });
+
+test("chaque fiche possède un lien direct consultable sans IA",()=>{
+  const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
+  const js=readFileSync(new URL("../app.js",import.meta.url),"utf8");
+  assert.match(html,/id="editorial-link"/);
+  assert.match(js,/url\.searchParams\.set\("article",id\)/);
+  assert.match(js,/new URLSearchParams\(window\.location\.search\)\.get\("article"\)/);
+  assert.match(js,/editorialArticles\.some\(article=>article\.id===articleId\)/);
+  assert.match(js,/navigate\("bibliotheque",false\)/);
+});
