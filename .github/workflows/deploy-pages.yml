@@ -38,7 +38,7 @@ jobs:
       - name: Préparer les fichiers publics
         run: |
           mkdir -p public
-          cp index.html styles.css app.js editorial.js public/
+          cp index.html styles.css app.js editorial.js intro.css intro.js public/
           cp -R assets public/
           cp -R design public/
           touch public/.nojekyll

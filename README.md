@@ -51,14 +51,14 @@ La maquette met donc en avant deux portes d'entrée de poids égal, utilisables 
 
 ## Ce qui est déjà disponible
 
-- Accueil responsive, mascotte Neuro Bob+ créée en SVG, interface de questions.
-- Deux perspectives complémentaires visibles dès l'accueil.
-- Discussion en **mode démonstration local**, avec réponses scénarisées sur plusieurs thèmes et absence de clé requise.
-- **Mode Claude** côté serveur avec consentement à l'envoi des échanges.
-- Exploration de fiches et filtres : compréhension mutuelle, troubles DYS, TDAH, autisme, aménagements, communication, sensibilisation, etc.
-- Options de confort : texte agrandi, contraste renforcé, moins d'animations, interface apaisée et lecture vocale facultative (si prise en charge par le navigateur).
-- Aucune inscription ; conversations uniquement en mémoire dans l'onglet. Les préférences visuelles sont conservées dans le navigateur si le stockage local est disponible.
-- Documentation de cadrage et instructions pour les prochains agents de développement.
+- **Cinq vues, une destination par entrée de menu :** Accueil, Bibliothèque, Parcours, S'entraîner avec Bob, Cadre d'usage. Chaque vue et chaque fiche a une adresse partageable (`#bibliotheque/travail`, `#fiche/dyslexie`…), et le bouton Retour du navigateur fonctionne.
+- **Bibliothèque :** 38 fiches (toutes les neurodivergences, dont tous les DYS ; mécanismes cognitifs ; codes implicites ; travail et RH ; modules de sensibilisation), avec statut de relecture et sources.
+- **Parcours :** 5 modules de sensibilisation ordonnés, dont un kit d'atelier d'équipe.
+- **S'entraîner avec Bob :** mises en situation, mode démonstration local (réponses préparées, aucune requête réseau) et mode IA en ligne avec consentement.
+- **Cadre d'usage :** pour qui, ce que l'outil n'est pas, règle sur les tiers, interlocuteurs internes, ressources externes, confidentialité.
+- **Affichage :** texte agrandi, contraste renforcé, animations réduites, interface apaisée ; lecture vocale facultative.
+- **Animation d'ouverture** (2,4 s, une fois par session, passable au clavier ou au clic, désactivée en mouvement réduit).
+- Direction artistique et audit UX : [AUDIT_DA_2026-11-22.md](docs/AUDIT_DA_2026-11-22.md), [AUDIT_UX_2026-11-22.md](docs/AUDIT_UX_2026-11-22.md) (analyses produites par IA).
 
 ## Démarrage
 
@@ -85,8 +85,11 @@ Les parcours, les fiches et le chat de démonstration ne nécessitent aucune API
 
 ~~~text
 index.html            Interface / navigation / vues
-styles.css            Design responsive, thèmes et accessibilité
-app.js                État local, démonstration, fiches, commandes
+styles.css            Design system (tokens), responsive, accessibilité
+intro.css, intro.js   Animation d'ouverture (une fois par session)
+app.js                Navigation par adresses, bibliothèque, parcours, chat de démonstration
+editorial.js          Fiches de la bibliothèque (statut, sections, sources)
+assets/characters/trim/  Poses de la mascotte recadrées + avatar
 assets/neuro-bob.svg  Mascotte originale (vectorielle)
 assets/favicon.svg    Icône
 api/chat.js           Passerelle serveur vers Anthropic Messages API

@@ -24,7 +24,7 @@ export const editorialArticles = [
       { name: "Haute Autorité de santé — TDAH, recommandations enfants et adolescents", date: "2024", url: "https://www.has-sante.fr/jcms/p_3302482/fr/trouble-du-neurodeveloppement-/-tdah-diagnostic-et-interventions-therapeutiques-aupres-des-enfants-et-adolescents", limitation: "Cette recommandation concerne les enfants et adolescents ; les implications professionnelles adultes demandent des sources spécifiques." },
       { name: "Haute Autorité de santé — TDAH chez l'adulte, note de cadrage", date: "2021", url: "https://has-sante.fr/jcms/p_3302480/fr/trouble-du-neurodeveloppement/-tdah-reperage-diagnostic-et-prise-en-charge-des-adultes-note-de-cadrage", limitation: "Document de cadrage, et non une validation des conseils de management." }
     ],
-    prompt: "Peux-tu m'expliquer en détail comment l'attention et l'inhibition peuvent intervenir dans une situation de travail, avec les limites de ces hypothèses ?"
+    prompt: "Pouvez-vous m'expliquer en détail comment l'attention et l'inhibition peuvent intervenir dans une situation de travail, avec les limites de ces hypothèses ?"
   },
   {
     id: "manager-priorites",
@@ -62,7 +62,7 @@ export const editorialArticles = [
       { title: "Comment clarifier sans conflit ?", text: "« Tu préfères qu'on décide vendredi ou que je considère qu'on ne le fait pas pour l'instant ? » est une question concrète et respectueuse. Demander une échéance n'est pas une faute de communication." }
     ],
     sources: [],
-    prompt: "Je suis neuroatypique et j'aimerais comprendre le langage indirect : explique les différents sens possibles de « on verra » avec des exemples."
+    prompt: "Je suis neuroatypique et j'aimerais comprendre le langage indirect : expliquez les différents sens possibles de « on verra » avec des exemples."
   },
   {
     id: "dys-reperes",
@@ -81,7 +81,7 @@ export const editorialArticles = [
     sources: [
       { name: "Haute Autorité de santé — Parcours de santé des enfants avec TSLA", date: "2017", url: "https://www.has-sante.fr/jcms/c_2822893/fr/comment-ameliorer-le-parcours-de-sante-d-un-enfant-avec-troubles-specifiques-du-langage-et-des-apprentissages", limitation: "Source pédiatrique : ne constitue pas à elle seule un protocole RH pour adultes." }
     ],
-    prompt: "Peux-tu expliquer les principaux troubles DYS, leurs manifestations possibles et des adaptations utiles, sans réduire les personnes à une étiquette ?"
+    prompt: "Pouvez-vous expliquer les principaux troubles DYS, leurs manifestations possibles et des adaptations utiles, sans réduire les personnes à une étiquette ?"
   },
   {
     id: "amenagement-travail",
@@ -101,7 +101,7 @@ export const editorialArticles = [
       { name: "CNIL — Données de santé et employeur", date: "Consulté en 2026", url: "https://www.cnil.fr/fr/cnil-direct/question/donnees-sur-la-sante-un-employeur-peut-il-les-connaitre", limitation: "Précautions concernant les données médicales des salariés." },
       { name: "Service-Public — Médecine du travail pour un salarié du secteur privé", date: "Consulté en 2026", url: "https://www.service-public.fr/particuliers/vosdroits/F2211", limitation: "Le recours au médecin du travail dépend de la situation." }
     ],
-    prompt: "Aide-moi à demander des consignes écrites et des aménagements concrets au travail, sans divulguer inutilement des informations de santé."
+    prompt: "Aidez-moi à demander des consignes écrites et des aménagements concrets au travail, sans divulguer inutilement des informations de santé."
   },
   {
     id: "autisme-sensorialite",
@@ -136,7 +136,7 @@ export const editorialArticles = [
       status: "redige",
       sections: sections.map(([t, text]) => ({ title: t, text })),
       sources,
-      prompt: "Peux-tu m'en dire plus sur : " + title.replace(/ :.*| —.*/, "") + " ?"
+      prompt: "Pouvez-vous m'en dire plus sur : " + title.replace(/ :.*| —.*/, "") + " ?"
     });
     return [
       // ───── Neurodivergences A–Z ─────
