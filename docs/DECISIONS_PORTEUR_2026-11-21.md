@@ -26,7 +26,7 @@ Cette règle remplace l'exemple de style de PRODUCT_DEFINITION_V3 §3 (« Dans l
 
 - La **Bibliothèque est prioritaire** sur l'agent.
 - Objectif immédiat : une **maquette de fonctionnalités et de positionnement**, volontairement **moins aboutie** que d'autres projets. Beaucoup de contenus peuvent être **superficiels ou de simples ébauches** (sommaire prévu, sans texte rédigé).
-- Chaque contenu porte un statut : `demo` (fiche documentée avec sources, non validée) ou `ebauche` (sommaire seulement, aucune source revendiquée). L'interface distingue visuellement les deux.
+- Chaque contenu porte un statut : `demo` (fiche documentée avec sources, non validée) ou `redige` (texte court d'information générale, relecture et sources à compléter). Les premières ébauches (sommaire seul) ont été rédigées le 22 novembre 2026.
 - Rubriques : Parcours de sensibilisation, Neurodivergences A–Z, Neurocognition, Décoder les codes, Travail & RH.
 
 ## 4. Validation des contenus

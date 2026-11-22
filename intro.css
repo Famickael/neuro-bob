@@ -1,0 +1,43 @@
+/* Neuro Bob+ — animation d'ouverture (≤ 2,4 s, une fois par session) */
+.nb-intro-overlay { display:none; }
+html.nb-intro-play body { overflow:hidden; }
+html.nb-intro-play .nb-intro-overlay {
+  display:grid; place-items:center; position:fixed; inset:0; z-index:100;
+  background:var(--c-navy,#142C6B); color:#fff; cursor:pointer;
+  transition:opacity .3s ease;
+}
+html.nb-intro-out .nb-intro-overlay { opacity:0; }
+.nb-intro-stage { position:relative; display:grid; justify-items:center; }
+.nb-intro-halo {
+  position:absolute; top:4%; left:50%; width:min(64vw,300px); aspect-ratio:1; translate:-50% 0;
+  border-radius:50%; background:radial-gradient(circle,rgba(84,121,247,.55) 0%,rgba(84,121,247,0) 68%);
+  opacity:0; animation:nb-fade .6s .1s ease-out forwards;
+}
+.nb-intro-bot {
+  position:relative; width:min(62vw,280px); height:auto;
+  margin:0 0 20px;               /* PNG recadré (assets/characters/trim) */
+  transform-origin:50% 85%;
+  opacity:0;
+  animation:nb-in .55s .1s cubic-bezier(.2,.8,.2,1) forwards, nb-wave .7s .75s ease-in-out 1;
+}
+.nb-intro-name {
+  margin:0; display:flex; flex-direction:column; align-items:center;
+  font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff,system-ui,sans-serif); letter-spacing:-.02em;
+  opacity:0; animation:nb-rise .4s .8s ease-out forwards;
+}
+.nb-intro-name b { color:var(--c-sun,#F5C518); }
+.nb-intro-name .sun-mark { margin-bottom:6px; }
+.nb-intro-name .sun-mark i { animation:nb-ray .3s calc(.95s + var(--n) * 60ms) ease-out backwards; }
+.nb-intro-hint {
+  position:fixed; left:0; right:0; bottom:24px; margin:0; text-align:center;
+  font:500 .875rem/1.4 var(--ff,system-ui,sans-serif); color:var(--c-nav-muted,#C9D6F5);
+  opacity:0; animation:nb-fade .3s 1s forwards;
+}
+@keyframes nb-in   { from { opacity:0; translate:0 24px; scale:.88; } to { opacity:1; translate:0 0; scale:1; } }
+@keyframes nb-wave { 0%,100% { rotate:0deg; } 25% { rotate:-5deg; } 50% { rotate:4deg; } 75% { rotate:-3deg; } }
+@keyframes nb-rise { from { opacity:0; translate:0 8px; } to { opacity:1; translate:0 0; } }
+@keyframes nb-fade { to { opacity:1; } }
+@keyframes nb-ray  { from { scale:1 0; opacity:0; } }
+/* Filets de sécurité : jamais d'intro avec mouvement réduit / interface apaisée */
+@media (prefers-reduced-motion:reduce) { html.nb-intro-play .nb-intro-overlay { display:none; } html.nb-intro-play body { overflow:auto; } }
+html.reduce-motion .nb-intro-overlay, html.simple-mode .nb-intro-overlay { display:none !important; }
