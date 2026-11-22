@@ -39,7 +39,7 @@ Documents de travail (propositions à valider, pas résultats de cinq agents aut
 - **GIF animé** : [Neuro Bob+ trouve une idée](assets/neuro-bob-idee.gif).
 - **Galerie intégrée** : ouvrir « Ressources » dans la démonstration pour parcourir et télécharger chaque pose.
 
-La page d'accueil a été rapprochée de la maquette validée : navigation bleue, zone de bienvenue avec Neuro Bob+ au centre, champ de question, cinq cartes pastel, filtres thématiques et trois panneaux à droite (mission, outils, engagements). Les autres pages restent les vues fonctionnelles du prototype.
+La page d'accueil est un tableau de bord d'outils : navigation bleue, zone de bienvenue avec Neuro Bob+ et champ de question, deux portes d'entrée de poids égal, cartes d'outils pastel (une couleur par rubrique, reprise dans la Bibliothèque), puces par neurodivergence et colonne de panneaux (« Votre parcours », « Outils pratiques », « Nos engagements », « Besoin d'aide ? »). Il n'y a ni fil d'Ariane, ni pied de page, ni rappel de marque blanche dans l'interface. Les compteurs de fiches sont calculés depuis `editorial.js` ; la progression du parcours (modules ouverts) n'est gardée qu'en `sessionStorage`, le temps de la visite, et n'est transmise nulle part.
 
 **Déploiement GitHub Pages** : le workflow `.github/workflows/deploy-pages.yml` copie le site, tout le répertoire `assets/` et `design/` afin que les images ne soient pas absentes du site publié. L'API Anthropic reste indisponible sur Pages seul : utiliser une fonction serveur séparée pour le mode Claude.
 
