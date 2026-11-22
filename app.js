@@ -371,10 +371,18 @@ function renderLibrary() {
     grid.append(b);
   }
 }
+// URL de partage stable : seul l'identifiant public de la fiche figure dans l'URL.
+function editorialPermalink(id) {
+  const url=new URL(window.location.href);
+  url.searchParams.set("article",id);
+  url.hash="";
+  return url.toString();
+}
 function openEditorial(id) {
   const a=editorialArticles.find(item=>item.id===id);
   if(!a)return;
   currentArticle=a;
+  $("#editorial-link").href=editorialPermalink(a.id);
   $("#editorial-title").textContent=a.title;
   const draft=a.status==="ebauche";
   $("#editorial-type").textContent=a.format+(draft?" · Ébauche":" · "+a.readingMinutes+" min de lecture");
@@ -508,6 +516,12 @@ function initialize() {
   if(location.hash) {
     const next=location.hash.slice(1);
     if(titles[next])navigate(next,false);
+  }
+  // Les liens de partage ouvrent la fiche directement, sans compte ni appel IA.
+  const articleId=new URLSearchParams(window.location.search).get("article");
+  if(articleId && editorialArticles.some(article=>article.id===articleId)) {
+    navigate("bibliotheque",false);
+    openEditorial(articleId);
   }
 }
 initialize();
