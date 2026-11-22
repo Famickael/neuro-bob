@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vercel dev",
-    "check": "node --check app.js && node --check editorial.js && node --check api/chat.js && node --check intro.js && node --test tests/editorial.test.mjs"
+    "check": "node --check app.js && node --check editorial.js && node --check api/chat.js && node --check intro.js && node --check scripts/bob-local.mjs && node --test tests/editorial.test.mjs",
+    "bob": "node scripts/bob-local.mjs"
   }
 }

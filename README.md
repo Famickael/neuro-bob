@@ -72,6 +72,14 @@ Puis ouvrir http://localhost:8080 .
 
 Les parcours, les fiches et le chat de démonstration ne nécessitent aucune API externe.
 
+**Mode local personnel (avec votre abonnement Claude) :** pour faire tourner Bob pour vous seul, sur votre machine, sans clé API.
+
+1. Installer Claude Code et s'y connecter avec votre compte (`claude`, puis `/login`).
+2. Dans le dossier du projet : `npm run bob`, puis ouvrir http://127.0.0.1:8787 .
+3. Dans « S'entraîner avec Bob », choisir « IA en ligne » et cocher l'accord.
+
+Le script `scripts/bob-local.mjs` sert le site et transmet chaque question à `claude -p` (aucun outil, aucun serveur MCP, aucune session enregistrée), avec le même prompt système que `api/chat.js`. Il n'écoute que sur 127.0.0.1 : **usage personnel uniquement**, à ne pas exposer sur un réseau ni déployer. Variables facultatives : `BOB_PORT`, `BOB_MODEL` (ex. `claude-sonnet-5-5`), `BOB_CLAUDE_BIN`.
+
 **Mode Claude :** le dépôt est configuré pour l'hébergement sur Vercel (fonction `api/chat.js`).
 
 1. Importer ce dépôt dans un projet Vercel ou exécuter `npx vercel dev` dans le dossier du projet.
