@@ -78,3 +78,10 @@ test("les liens internes vers des fiches pointent vers des fiches existantes",()
   const cats=new Set(editorialCategories.map(c=>c.id));
   for(const m of html.matchAll(/data-library="([^"]+)"/g)) assert.ok(cats.has(m[1]),m[1]);
 });
+
+test("la Bibliothèque n'affirme pas qu'une relecture humaine a déjà commencé",()=>{
+  const js=readFileSync(new URL("../app.js",import.meta.url),"utf8");
+  assert.doesNotMatch(js,/en cours de relecture par des experts/);
+  assert.match(js,/Relecture scientifique et relecture par des personnes concernées à organiser avant diffusion/);
+  assert.match(js,/Sources à compléter et relectures scientifique et par des personnes concernées à organiser avant diffusion/);
+});

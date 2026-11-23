@@ -330,8 +330,8 @@ function openEditorial(id, push = false) {
   $("#editorial-type").textContent = a.format + " · " + a.readingMinutes + " min";
   $("#editorial-abstract").textContent = a.abstract;
   $("#editorial-status").textContent = a.status === "demo"
-    ? "Fiche documentée, en cours de relecture par des experts et des personnes concernées."
-    : "Information générale, en cours de relecture par des experts et des personnes concernées.";
+    ? "Fiche de démonstration documentée. Relecture scientifique et relecture par des personnes concernées à organiser avant diffusion."
+    : "Ébauche informative. Sources à compléter et relectures scientifique et par des personnes concernées à organiser avant diffusion.";
   const sections = $("#editorial-sections"); sections.replaceChildren();
   for (const item of a.sections) {
     const section = document.createElement("section");
