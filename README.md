@@ -39,7 +39,7 @@ Documents de travail (propositions à valider, pas résultats de cinq agents aut
 - **GIF animé** : [Neuro Bob+ trouve une idée](assets/neuro-bob-idee.gif).
 - **Galerie intégrée** : ouvrir « Ressources » dans la démonstration pour parcourir et télécharger chaque pose.
 
-La page d'accueil a été rapprochée de la maquette validée : navigation bleue, zone de bienvenue avec Neuro Bob+ au centre, champ de question, cinq cartes pastel, filtres thématiques et trois panneaux à droite (mission, outils, engagements). Les autres pages restent les vues fonctionnelles du prototype.
+La page d'accueil est un tableau de bord d'outils : navigation bleue, zone de bienvenue avec Neuro Bob+ et champ de question, deux portes d'entrée de poids égal, cartes d'outils pastel (une couleur par rubrique, reprise dans la Bibliothèque), puces par neurodivergence et colonne de panneaux (« Votre parcours », « Outils pratiques », « Nos engagements », « Besoin d'aide ? »). Il n'y a ni fil d'Ariane, ni pied de page, ni rappel de marque blanche dans l'interface. Les compteurs de fiches sont calculés depuis `editorial.js` ; la progression du parcours (modules ouverts) n'est gardée qu'en `sessionStorage`, le temps de la visite, et n'est transmise nulle part.
 
 **Déploiement GitHub Pages** : le workflow `.github/workflows/deploy-pages.yml` copie le site, tout le répertoire `assets/` et `design/` afin que les images ne soient pas absentes du site publié. L'API Anthropic reste indisponible sur Pages seul : utiliser une fonction serveur séparée pour le mode Claude.
 
@@ -71,6 +71,23 @@ python3 -m http.server 8080
 Puis ouvrir http://localhost:8080 .
 
 Les parcours, les fiches et le chat de démonstration ne nécessitent aucune API externe.
+
+**Bob avec votre abonnement Claude, depuis GitHub (Codespaces, rien à installer) :**
+
+1. Sur la page du dépôt GitHub : bouton vert **Code** → onglet **Codespaces** → **Create codespace**. Patienter une à deux minutes.
+2. Dans le terminal en bas de l'écran, taper `claude`, puis suivre la connexion à votre compte Claude. Quitter ensuite avec `/exit`.
+3. Taper `npm run bob`. Un onglet « Neuro Bob+ » s'ouvre (sinon : onglet **Ports**, ligne 8787, icône globe).
+4. Dans « S'entraîner avec Bob », choisir « IA en ligne » et cocher l'accord.
+
+Le port reste privé : seul votre compte GitHub peut ouvrir la page. Arrêter le Codespace après usage (menu Codespaces → Stop) pour ne pas consommer votre quota gratuit.
+
+**Mode local personnel (avec votre abonnement Claude) :** pour faire tourner Bob pour vous seul, sur votre machine, sans clé API.
+
+1. Installer Claude Code et s'y connecter avec votre compte (`claude`, puis `/login`).
+2. Dans le dossier du projet : `npm run bob`, puis ouvrir http://127.0.0.1:8787 .
+3. Dans « S'entraîner avec Bob », choisir « IA en ligne » et cocher l'accord.
+
+Le script `scripts/bob-local.mjs` sert le site et transmet chaque question à `claude -p` (aucun outil, aucun serveur MCP, aucune session enregistrée), avec le même prompt système que `api/chat.js`. Il n'écoute que sur 127.0.0.1 : **usage personnel uniquement**, à ne pas exposer sur un réseau ni déployer. Variables facultatives : `BOB_PORT`, `BOB_MODEL` (ex. `claude-sonnet-5-5`), `BOB_CLAUDE_BIN`.
 
 **Mode Claude :** le dépôt est configuré pour l'hébergement sur Vercel (fonction `api/chat.js`).
 

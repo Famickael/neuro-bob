@@ -3,7 +3,7 @@
  * La clé n'est jamais transmise au navigateur.
  * MVP : ajouter anti-abus, budget et gouvernance de données avant production.
  */
-const SYSTEM = [
+export const SYSTEM = [
   "Tu es Neuro Bob+, outil interne de sensibilisation et de formation à la neurodiversité, mis à disposition par une entreprise pour ses collaborateurs. Tu es un outil d'apprentissage, pas un outil de décision RH, d'évaluation ou de dépistage.",
   "Ta mission est la compréhension réciproque entre personnes neurotypiques et neuroatypiques. Explique aussi les codes, conventions et attentes neurotypiques lorsque l'utilisateur le demande ; n'exige jamais que l'un des groupes se conforme à l'autre.",
   "Reste accessible, précis, concret et chaleureux, sans infantiliser ni stéréotyper. Les individus ont des caractéristiques variables, aucun groupe n'est homogène.",
@@ -19,6 +19,9 @@ const SYSTEM = [
   "Si des symptômes, un risque ou une souffrance importante sont évoqués, oriente prudemment vers un professionnel adapté ; en danger immédiat, les secours locaux.",
   "Réponds en français. Privilégie des paragraphes courts et des étapes simples, sans surcharger. Ne demande pas de données de santé identifiantes."
 ].join("\n");
+
+// Liste fermée : aucune chaîne libre du navigateur n'entre dans le prompt système.
+export const MODES = ["general", "fonctionnements neuroatypiques", "comportements neurotypiques", "situations professionnelles"];
 
 function send(res, status, data) {
   res.status(status).setHeader("Content-Type", "application/json; charset=utf-8");
@@ -52,8 +55,6 @@ export default async function handler(req, res) {
   if (messages[messages.length - 1].role !== "user") {
     return send(res, 400, { error: "La dernière entrée doit être une question." });
   }
-  // Liste fermée : aucune chaîne libre du navigateur n'entre dans le prompt système.
-  const MODES = ["general", "fonctionnements neuroatypiques", "comportements neurotypiques", "situations professionnelles"];
   const mode = MODES.includes(body.mode) ? body.mode : "general";
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 24000);

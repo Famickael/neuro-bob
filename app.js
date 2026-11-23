@@ -18,6 +18,11 @@ let pending = false;
 let messages = [];
 let libraryCategory = "tous";
 let currentArticle = null;
+// Modules ouverts pendant cette visite : mémoire de session uniquement, rien n'est transmis.
+const seenModules = new Set();
+try { for (const id of JSON.parse(sessionStorage.getItem("nb-modules-seen") || "[]")) seenModules.add(id); } catch {}
+const moduleList = () => editorialArticles.filter(a => a.category === "sensibilisation");
+const shortModuleTitle = m => m.title.replace(/^Module \d+ — /, "");
 
 const normalize = value => value.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 function node(tag, text, cls) {
@@ -50,7 +55,6 @@ function navigate(next, { focus = true, push = true } = {}) {
     button.classList.toggle("is-current", active);
     if (active) button.setAttribute("aria-current","page"); else button.removeAttribute("aria-current");
   });
-  $("#page-label").textContent = titles[next];
   document.title = titles[next] + " — Neuro Bob+";
   if (next === "bibliotheque") setHash("#bibliotheque" + (libraryCategory !== "tous" ? "/" + libraryCategory : ""), push);
   else setHash("#" + next, push);
@@ -280,6 +284,9 @@ function renderLibrary() {
   for (const category of editorialCategories) {
     const b = node("button", category.label, "filter-pill" + (libraryCategory === category.id ? " is-selected" : ""));
     b.type = "button";
+    b.dataset.category = category.id;
+    const total = category.id === "tous" ? editorialArticles.length : editorialArticles.filter(a => a.category === category.id).length;
+    b.append(node("span", String(total), "pill-count"));
     b.setAttribute("aria-pressed", String(libraryCategory === category.id));
     b.addEventListener("click", () => {
       libraryCategory = category.id;
@@ -308,13 +315,18 @@ function renderFeatured() {
 }
 function renderParcours() {
   const list = $("#parcours-list");
-  const modules = editorialArticles.filter(a => a.category === "sensibilisation");
+  const modules = moduleList();
   list.replaceChildren(...modules.map((m, index) => {
-    const li = node("li", null, "parcours-step");
-    li.append(node("span", String(index + 1), "step-number"));
+    const done = seenModules.has(m.id);
+    const li = node("li", null, "parcours-step" + (done ? " is-done" : ""));
+    const number = node("span", done ? null : String(index + 1), "step-number");
+    if (done) number.append(icon("i-check"));
+    number.setAttribute("aria-hidden", "true");
+    li.append(number);
     const body = node("div", null, "step-body");
-    const title = m.title.replace(/^Module \d+ — /, "");
+    const title = shortModuleTitle(m);
     body.append(node("h2", title), node("p", m.abstract, "card-text"), node("p", m.readingMinutes + " min · " + m.sections.map(s => s.title).join(" · "), "library-meta"));
+    if (done) body.append(node("p", "Module ouvert pendant cette visite", "step-done"));
     const open = node("button", "Ouvrir le module", "quiet-button");
     open.type = "button";
     open.addEventListener("click", () => openEditorial(m.id));
@@ -322,10 +334,48 @@ function renderParcours() {
     return li;
   }));
 }
+/* Accueil : panneau « Votre parcours » et compteurs, calculés depuis editorial.js */
+function renderJourney() {
+  const modules = moduleList();
+  const done = modules.filter(m => seenModules.has(m.id)).length;
+  $("#journey-status").textContent = done
+    ? done + " module" + (done > 1 ? "s" : "") + " ouvert" + (done > 1 ? "s" : "") + " sur " + modules.length
+    : modules.length + " modules, de 15 à 45 minutes";
+  $("#journey-fill").style.width = (modules.length ? Math.round(done / modules.length * 100) : 0) + "%";
+  $("#journey-list").replaceChildren(...modules.map((m, index) => {
+    const li = document.createElement("li");
+    const seen = seenModules.has(m.id);
+    const b = node("button", null, "journey-item" + (seen ? " is-done" : ""));
+    b.type = "button";
+    b.dataset.article = m.id;
+    const num = node("span", seen ? null : String(index + 1), "journey-num");
+    num.setAttribute("aria-hidden", "true");
+    if (seen) num.append(icon("i-check"));
+    b.append(num, node("span", shortModuleTitle(m)));
+    if (seen) b.append(node("span", " (ouvert)", "sr-only"));
+    li.append(b);
+    return li;
+  }));
+}
+function renderCounts() {
+  for (const el of $$("[data-count]")) {
+    const n = editorialArticles.filter(a => a.category === el.dataset.count).length;
+    const unit = el.dataset.unit || "fiche";
+    el.textContent = n + " " + unit + (n > 1 ? "s" : "");
+  }
+}
+function markModuleSeen(a) {
+  if (a.category !== "sensibilisation" || seenModules.has(a.id)) return;
+  seenModules.add(a.id);
+  try { sessionStorage.setItem("nb-modules-seen", JSON.stringify([...seenModules])); } catch {}
+  renderJourney();
+  renderParcours();
+}
 function openEditorial(id, push = false) {
   const a = editorialArticles.find(item => item.id === id);
   if (!a) return;
   currentArticle = a;
+  markModuleSeen(a);
   $("#editorial-title").textContent = a.title;
   $("#editorial-type").textContent = a.format + " · " + a.readingMinutes + " min";
   $("#editorial-abstract").textContent = a.abstract;
@@ -384,6 +434,8 @@ function initialize() {
   renderLibrary();
   renderFeatured();
   renderParcours();
+  renderJourney();
+  renderCounts();
 
   $("#library-search").addEventListener("input", renderLibrary);
   const editorialDialog = $("#editorial-dialog");
