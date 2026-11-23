@@ -4,7 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#142C6B">
-  <meta name="description" content="Neuro Bob+ : fiches, parcours de sensibilisation et agent d'entraînement pour comprendre la neurodiversité au travail, dans les deux sens.">
+  <meta name="description" content="Neuro Bob+ aide à comprendre la neurodiversité au travail, dans les deux sens : fiches sur le TDAH, l'autisme et tous les troubles DYS, codes implicites expliqués, parcours de sensibilisation et agent d'entraînement. Sans diagnostic ni étiquette.">
+  <link rel="canonical" href="https://famickael.github.io/neuro-bob/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Neuro Bob+">
+  <meta property="og:title" content="Neuro Bob+ — Comprendre la neurodiversité au travail">
+  <meta property="og:description" content="Fiches, parcours de sensibilisation et agent d'entraînement pour mieux se comprendre entre personnes neurotypiques et neurodivergentes. Sans diagnostic ni étiquette.">
+  <meta property="og:url" content="https://famickael.github.io/neuro-bob/">
+  <meta property="og:image" content="https://famickael.github.io/neuro-bob/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Le robot Neuro Bob+ bras ouverts, à côté du titre « Comprendre la neurodiversité au travail, dans les deux sens ».">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neuro Bob+ — Comprendre la neurodiversité au travail">
+  <meta name="twitter:description" content="Fiches, parcours de sensibilisation et agent d'entraînement, dans les deux sens. Sans diagnostic ni étiquette.">
+  <meta name="twitter:image" content="https://famickael.github.io/neuro-bob/assets/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Neuro Bob+","url":"https://famickael.github.io/neuro-bob/","inLanguage":"fr","description":"Fiches, parcours de sensibilisation et agent d'entraînement pour comprendre la neurodiversité au travail, dans les deux sens."}</script>
   <title>Neuro Bob+ — Comprendre la neurodiversité au travail</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -53,6 +69,8 @@
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
     <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6m0-6-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol>
   </svg>
 
@@ -109,6 +127,10 @@
                   <button type="button" class="ask-chip" data-prompt="On m'a dit « ce serait bien que ce soit fait rapidement ». Est-ce une demande prioritaire ? Comment clarifier ?">« Ce serait bien si… »</button>
                   <button type="button" class="ask-chip" data-prompt="Comment demander des consignes écrites à mon manager sans avoir à parler de ma santé ?">Obtenir des consignes écrites</button>
                 </div>
+                <p class="hero-demo">
+                  <button type="button" class="demo-cta" data-demo="manager-tiers"><span class="demo-cta-icon" aria-hidden="true"><svg><use href="#i-play"></use></svg></span>Voir Bob en action</button>
+                  <span>Une conversation de démonstration, préparée à l'avance et sans IA.</span>
+                </p>
               </div>
 
               <section class="home-block" aria-labelledby="doors-title">
@@ -303,9 +325,40 @@
             <div class="conversation-panel">
               <div class="chat-toolbar">
                 <div class="chat-identity"><img src="./assets/characters/trim/bob-avatar.png" alt="" width="40" height="40"><div><strong>Bob</strong><span id="chat-mode-label">Mode démonstration</span></div></div>
-                <button class="quiet-button" id="reset-chat" type="button"><svg aria-hidden="true"><use href="#i-refresh"></use></svg>Recommencer</button>
+                <div class="chat-actions">
+                  <button class="primary-button" id="demo-open" type="button" aria-expanded="false" aria-controls="demo-picker"><svg aria-hidden="true"><use href="#i-play"></use></svg>Voir une démonstration</button>
+                  <button class="quiet-button" id="reset-chat" type="button"><svg aria-hidden="true"><use href="#i-refresh"></use></svg><span>Recommencer</span></button>
+                </div>
+              </div>
+              <section class="demo-picker" id="demo-picker" aria-labelledby="demo-picker-title" hidden>
+                <div class="demo-picker-head">
+                  <h2 id="demo-picker-title">Quelle conversation voulez-vous voir ?</h2>
+                  <button class="quiet-button" id="demo-picker-close" type="button">Fermer</button>
+                </div>
+                <p class="small-text">Échanges préparés à l'avance : aucune IA n'est utilisée et rien n'est envoyé.</p>
+                <div class="demo-choices" id="demo-choices"></div>
+              </section>
+              <div class="demo-banner" id="demo-banner" hidden>
+                <div class="demo-banner-text">
+                  <p><strong>Conversation de démonstration</strong> — échanges préparés à l'avance, aucune IA n'est utilisée.</p>
+                  <p class="demo-title" id="demo-title"></p>
+                </div>
+                <button class="quiet-button" id="demo-change" type="button" aria-expanded="false" aria-controls="demo-picker">Changer de scénario</button>
               </div>
               <div class="conversation-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions text"></div>
+              <div class="demo-controls" id="demo-controls" role="group" aria-label="Commandes de la démonstration" hidden>
+                <p id="demo-progress"></p>
+                <div class="demo-buttons">
+                  <button class="quiet-button" id="demo-pause" type="button"><svg aria-hidden="true"><use href="#i-pause"></use></svg><span>Pause</span></button>
+                  <button class="quiet-button" id="demo-next" type="button">Passer à la suite</button>
+                  <button class="quiet-button" id="demo-all" type="button">Tout afficher</button>
+                  <button class="quiet-button" id="demo-stop" type="button">Arrêter</button>
+                  <button class="quiet-button" id="demo-replay" type="button"><svg aria-hidden="true"><use href="#i-refresh"></use></svg>Rejouer</button>
+                  <button class="quiet-button" id="demo-following" type="button">Scénario suivant<svg aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+                  <button class="quiet-button" id="demo-quit" type="button">Quitter<span>la démonstration</span></button>
+                </div>
+              </div>
+              <p class="sr-only" id="demo-status" role="status"></p>
               <div class="chat-composer">
                 <form id="chat-form" autocomplete="off"><label class="sr-only" for="chat-input">Votre message</label><textarea id="chat-input" maxlength="2500" rows="2" required placeholder="Décrivez la situation ou posez votre question…"></textarea><button type="submit" id="chat-send" class="send-button" aria-label="Envoyer le message"><svg aria-hidden="true"><use href="#i-send"></use></svg></button></form>
                 <p>Entrée pour envoyer · Maj + Entrée pour aller à la ligne</p>

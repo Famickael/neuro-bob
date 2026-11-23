@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { editorialArticles, editorialCategories } from "../editorial.js";
+import { demoScenarios } from "../demo-scenarios.js";
 
 test("six fiches documentées, des ébauches, des identifiants uniques",()=>{
   assert.equal(editorialArticles.filter(a=>a.status==="demo").length,6);
@@ -33,7 +34,9 @@ test("bibliothèque : métadonnées et sources exploitables",()=>{
 });
 test("GitHub Pages embarque l'index éditorial",()=>{
   const workflow=readFileSync(new URL("../.github/workflows/deploy-pages.yml",import.meta.url),"utf8");
-  assert.match(workflow,/cp index\.html styles\.css app\.js editorial\.js intro\.css intro\.js public\//);
+  assert.match(workflow,/cp index\.html styles\.css app\.js editorial\.js demo-scenarios\.js intro\.css intro\.js public\//);
+  const local=readFileSync(new URL("../scripts/bob-local.mjs",import.meta.url),"utf8");
+  assert.match(local,/demo-scenarios\\\.js/);
   const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
   assert.match(html,/data-page="bibliotheque"/);
   assert.match(html,/id="library-grid"/);
@@ -77,4 +80,43 @@ test("les liens internes vers des fiches pointent vers des fiches existantes",()
   for(const m of html.matchAll(/data-article="([^"]+)"/g)) assert.ok(ids.has(m[1]),m[1]);
   const cats=new Set(editorialCategories.map(c=>c.id));
   for(const m of html.matchAll(/data-library="([^"]+)"/g)) assert.ok(cats.has(m[1]),m[1]);
+});
+test("démonstration jouée : scénarios complets, fiches citées existantes",()=>{
+  assert.ok(demoScenarios.length>=3&&demoScenarios.length<=4);
+  assert.equal(new Set(demoScenarios.map(s=>s.id)).size,demoScenarios.length);
+  const ids=new Set(editorialArticles.map(a=>a.id));
+  let links=0;
+  for(const s of demoScenarios) {
+    assert.ok(s.id&&s.title&&s.persona&&s.summary,s.id);
+    assert.ok(s.turns.length>=2&&s.turns.length<=3,s.id);
+    for(const t of s.turns) {
+      assert.ok(t.user.trim()&&t.bob.trim(),s.id);
+      assert.doesNotMatch(t.bob,/\b(tu|toi|ton|tes)\b/i,s.id+" : vouvoiement");
+      for(const l of t.links||[]) { assert.ok(ids.has(l.id),s.id+" → "+l.id); assert.ok(l.label,l.id); links++; }
+    }
+    assert.ok(s.turns.some(t=>(t.links||[]).length),s.id+" : au moins une fiche citée");
+  }
+  assert.ok(links>=demoScenarios.length);
+  const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
+  assert.match(html,/Conversation de démonstration<\/strong> — échanges préparés à l'avance, aucune IA n'est utilisée/);
+  assert.match(html,/id="demo-open"/);
+  const known=new Set(demoScenarios.map(s=>s.id));
+  for(const m of html.matchAll(/data-demo="([^"]+)"/g)) assert.ok(known.has(m[1]),m[1]);
+  const js=readFileSync(new URL("../demo-scenarios.js",import.meta.url),"utf8");
+  assert.doesNotMatch(js,/fetch\(|XMLHttpRequest|import /);
+});
+test("démonstration jouée : option B, aucun trouble nommé à propos d'un tiers",()=>{
+  // Règle simple et robuste : quand l'utilisateur décrit une personne absente, les réponses de Bob ne citent
+  // aucun nom de trouble ou de profil, pas même pour expliquer son refus. Le mot ne vient que de l'utilisateur.
+  const labels=/tdah|hyperactiv|autis|asperger|\bdys|hpi|haut potentiel|tourette|\btnd\b|\btsa\b|\btdi\b|neuroatypique|neurodivergen/i;
+  const manager=demoScenarios.find(s=>s.id==="manager-tiers");
+  assert.ok(manager&&manager.thirdParty);
+  const ask=manager.turns.find(t=>/tdah/i.test(t.user));
+  assert.ok(ask,"le manager demande une étiquette");
+  assert.match(ask.bob,/Je ne répondrai pas à cette question/);
+  assert.match(ask.bob,/à la place/);
+  for(const s of demoScenarios.filter(s=>s.thirdParty)) for(const t of s.turns) assert.doesNotMatch(t.bob,labels,s.id);
+  // Le scénario « codes » ne présente pas les codes neurotypiques comme une norme à imiter.
+  const codes=demoScenarios.find(s=>s.id==="decoder-codes");
+  assert.ok(codes.turns.some(t=>/pas une norme à imiter/.test(t.bob)));
 });

@@ -31,7 +31,7 @@ const TYPES = {
   ".png":"image/png", ".jpg":"image/jpeg", ".gif":"image/gif", ".ico":"image/x-icon", ".woff2":"font/woff2"
 };
 // Seuls les fichiers du site sont servis (pas les docs, scripts, .env, .git…).
-const PUBLIC = /^\/(index\.html|styles\.css|app\.js|editorial\.js|intro\.css|intro\.js|assets\/.+|design\/.+)$/;
+const PUBLIC = /^\/(index\.html|styles\.css|app\.js|editorial\.js|demo-scenarios\.js|intro\.css|intro\.js|assets\/.+|design\/.+)$/;
 
 function json(res, status, data) {
   res.writeHead(status, { "Content-Type":"application/json; charset=utf-8", "Cache-Control":"no-store" });
