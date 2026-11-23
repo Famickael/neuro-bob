@@ -106,6 +106,7 @@ styles.css            Design system (tokens), responsive, accessibilité
 intro.css, intro.js   Animation d'ouverture (une fois par session)
 app.js                Navigation par adresses, bibliothèque, parcours, chat de démonstration
 editorial.js          Fiches de la bibliothèque (statut, sections, sources)
+demo-scenarios.js     Conversations de démonstration jouées dans la vue Bob (préparées à l'avance, sans IA)
 assets/characters/trim/  Poses de la mascotte recadrées + avatar
 assets/neuro-bob.svg  Mascotte originale (vectorielle)
 assets/favicon.svg    Icône

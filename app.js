@@ -1,8 +1,9 @@
 import { editorialArticles, editorialCategories } from "./editorial.js";
+import { demoScenarios } from "./demo-scenarios.js";
 
 /* Neuro Bob+ — application sans dépendance.
  * Les messages ne sont jamais sauvegardés ; seuls les réglages d'affichage peuvent l'être (localStorage).
- * Adresses : #accueil, #bibliotheque, #bibliotheque/<rubrique>, #fiche/<id>, #parcours, #bob, #apropos.
+ * Adresses : #accueil, #bibliotheque, #bibliotheque/<rubrique>, #fiche/<id>, #parcours, #bob, #bob/demo/<scénario>, #apropos.
  */
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -59,6 +60,7 @@ function navigate(next, { focus = true, push = true } = {}) {
   if (next === "bibliotheque") setHash("#bibliotheque" + (libraryCategory !== "tous" ? "/" + libraryCategory : ""), push);
   else setHash("#" + next, push);
   closeMenu(false);
+  if (next !== "bob") pauseDemo();
   window.scrollTo({ top:0, behavior: reduceMotion() ? "instant" : "smooth" });
   if (focus) $("[data-page='" + next + "'] h1")?.focus({ preventScroll:true });
 }
@@ -68,13 +70,14 @@ function openLibrary(category, options) {
   navigate("bibliotheque", options);
 }
 function routeFromHash() {
-  const [first, second] = location.hash.slice(1).split("/");
+  const [first, second, third] = location.hash.slice(1).split("/");
   if (first === "fiche" && second) {
     if (!view || $("[data-page='" + view + "']").hidden) navigate("bibliotheque", { focus:false, push:false });
     openEditorial(decodeURIComponent(second), false);
     return;
   }
   if ($("#editorial-dialog").open) $("#editorial-dialog").close();
+  if (first === "bob" && second === "demo") { navigate("bob", { focus:false, push:false }); startDemo(third); return; }
   if (first === "bibliotheque") { openLibrary(second || "tous", { focus:false, push:false }); return; }
   navigate(titles[first] ? first : "accueil", { focus:false, push:false });
 }
@@ -105,6 +108,7 @@ function closeMenu(returnFocus = true) {
 /* ───────── Conversation ───────── */
 function draftQuestion(text) {
   navigate("bob", { focus:false });
+  interruptDemo();
   $("#chat-input").value = text;
   $("#chat-input").focus();
 }
@@ -120,7 +124,7 @@ function switchMode(mode) {
   if (mode === chatMode) return;
   chatMode = mode;
   messages = [];
-  drawWelcome();
+  exitDemo();
   $("#select-demo").classList.toggle("is-selected", mode==="demo");
   $("#select-claude").classList.toggle("is-selected", mode==="claude");
   $("#select-demo").setAttribute("aria-pressed", String(mode==="demo"));
@@ -131,7 +135,7 @@ function switchMode(mode) {
   $("#chat-mode-label").textContent = mode==="demo" ? "Mode démonstration" : "IA en ligne — accord requis avant l'envoi";
   $("#chat-input").focus();
 }
-function makeMessage(role, text, simulated = false) {
+function makeMessage(role, text, simulated = false, { author, note, links = [] } = {}) {
   const item = node("div", null, "message message-" + (role==="assistant" ? "bot" : "user"));
   const inner = node("div", null, "message-inner");
   if (role === "assistant") {
@@ -139,10 +143,23 @@ function makeMessage(role, text, simulated = false) {
     avatar.src = "./assets/characters/trim/bob-avatar.png"; avatar.alt = ""; avatar.width = 32; avatar.height = 32;
     item.append(avatar);
   }
-  inner.append(node("span", role==="assistant" ? "Bob" : "Vous", "message-author"), node("div", text, "message-bubble"));
+  inner.append(node("span", author || (role==="assistant" ? "Bob" : "Vous"), "message-author"), node("div", text, "message-bubble"));
+  if (links.length) {
+    const list = node("div", null, "message-links");
+    list.setAttribute("role", "group");
+    list.setAttribute("aria-label", "Fiches de la Bibliothèque à consulter");
+    for (const link of links) {
+      const open = node("button", null, "fiche-link");
+      open.type = "button";
+      open.dataset.article = link.id;
+      open.append(icon("i-book"), node("span", "Fiche : " + link.label), icon("i-arrow"));
+      list.append(open);
+    }
+    inner.append(list);
+  }
   if (role === "assistant") {
     const meta = node("div", null, "message-meta");
-    if (simulated) meta.append(node("span", "Exemple local, sans génération IA"));
+    if (note || simulated) meta.append(node("span", note || "Exemple local, sans génération IA"));
     if ("speechSynthesis" in window) {
       const listen = node("button", null, "listen-button");
       listen.type = "button";
@@ -190,6 +207,209 @@ function demoAnswer(question) {
     return "Une bonne première étape consiste à décrire ce qui s'est passé sans conclure sur le fonctionnement de l'autre.\n\nVous pourriez essayer :\n• « Voici ce que j'ai compris. Est-ce bien ce que tu voulais dire ? »\n• « Quelle façon de communiquer serait la plus claire pour nous deux ? »\n• « Sur quoi pouvons-nous nous mettre d'accord pour la prochaine fois ? »\n\nUn comportement isolé ne permet pas d'inférer un diagnostic. Une personne reste toujours plus complexe qu'une catégorie.";
   return "Dans Neuro Bob+, l'idée est d'examiner une situation sans juger ni diagnostiquer les personnes.\n\nTrois questions peuvent aider :\n• Quel fait concret ou quel échange pose difficulté ?\n• Quelles interprétations différentes sont possibles ?\n• Quelle clarification ou quel ajustement pourrait convenir aux personnes concernées ?\n\nCette réponse est un exemple préparé à l'avance. Avec l'IA en ligne, Bob répond à votre situation précise.";
 }
+/* ───────── Démonstration jouée ─────────
+ * Rejoue une conversation de demo-scenarios.js dans le flux, sans réseau et sans toucher à `messages`
+ * (l'historique envoyé à l'API). États : off → playing ⇄ paused → ended.
+ * Mouvement réduit : pas de minuteur ni d'indicateur d'écriture, chaque message s'affiche à la demande.
+ */
+const demo = { scenario:null, steps:[], index:0, state:"off", timer:null, typing:null, note:"" };
+const demoRunning = () => demo.state === "playing" || demo.state === "paused";
+const typingTime = text => Math.min(3200, Math.max(1200, text.length * 6));
+const readingTime = text => Math.min(14000, Math.max(3500, text.length * 45));
+function announceDemo(text) { $("#demo-status").textContent = text; }
+function clearDemoTimer() {
+  clearTimeout(demo.timer); demo.timer = null;
+  demo.typing?.remove(); demo.typing = null;
+}
+function showDemoStep(step) {
+  const stream = $("#chat-stream");
+  const item = step.role === "user"
+    ? makeMessage("user", step.text, false, { author:demo.scenario.persona + " (exemple)" })
+    : makeMessage("assistant", step.text, false, { note:"Réponse préparée à l'avance, sans IA", links:step.links });
+  stream.append(item);
+  return item;
+}
+// Amener le début du nouveau message en haut du flux : on lit une réponse depuis sa première ligne.
+function revealMessage(item) {
+  const stream = $("#chat-stream");
+  stream.scrollTop += item.getBoundingClientRect().top - stream.getBoundingClientRect().top - 12;
+}
+function showTyping() {
+  const stream = $("#chat-stream");
+  const item = node("div", null, "message message-bot message-typing");
+  const avatar = node("img", null, "message-avatar");
+  avatar.src = "./assets/characters/trim/bob-avatar.png"; avatar.alt = ""; avatar.width = 32; avatar.height = 32;
+  const bubble = node("div", null, "message-bubble");
+  const dots = node("span", null, "typing-dots"); dots.setAttribute("aria-hidden", "true");
+  dots.append(node("i"), node("i"), node("i"));
+  bubble.append(dots, node("span", "Bob écrit…"));
+  const inner = node("div", null, "message-inner");
+  inner.append(node("span", "Bob", "message-author"), bubble);
+  item.append(avatar, inner);
+  stream.append(item);
+  stream.scrollTop = stream.scrollHeight;
+  demo.typing = item;
+}
+function scheduleDemo(quick = false) {
+  clearDemoTimer();
+  if (demo.state !== "playing" || reduceMotion()) return;
+  const next = demo.steps[demo.index];
+  const previous = demo.steps[demo.index - 1];
+  if (!next) return;
+  if (next.role === "user") {
+    demo.timer = setTimeout(advanceDemo, quick || !previous ? 700 : readingTime(previous.text));
+  } else {
+    demo.timer = setTimeout(() => {
+      showTyping();
+      demo.timer = setTimeout(advanceDemo, typingTime(next.text));
+    }, quick ? 300 : 900);
+  }
+}
+function advanceDemo() {
+  if (!demoRunning()) return;
+  clearDemoTimer();
+  const step = demo.steps[demo.index];
+  if (!step) return;
+  demo.index += 1;
+  revealMessage(showDemoStep(step));
+  if (demo.index >= demo.steps.length) { endDemo("Fin de la démonstration. À vous d'essayer ci-dessous."); return; }
+  renderDemoControls();
+  scheduleDemo();
+}
+function showAllDemo() {
+  if (!demoRunning()) return;
+  clearDemoTimer();
+  const added = demo.steps.slice(demo.index).map(showDemoStep);
+  demo.index = demo.steps.length;
+  if (added[0]) revealMessage(added[0]);
+  endDemo("Fin de la démonstration. À vous d'essayer ci-dessous.");
+}
+function pauseDemo() {
+  if (demo.state !== "playing" || reduceMotion()) return;
+  clearDemoTimer();
+  demo.state = "paused";
+  renderDemoControls();
+  announceDemo("Démonstration en pause.");
+}
+function resumeDemo() {
+  if (demo.state !== "paused") return;
+  demo.state = "playing";
+  renderDemoControls();
+  announceDemo("Reprise de la démonstration.");
+  scheduleDemo(true);
+}
+function endDemo(note) {
+  if (!demoRunning()) return;
+  clearDemoTimer();
+  demo.state = "ended";
+  demo.note = note;
+  renderDemoControls();
+  announceDemo(note);
+}
+// L'utilisateur prend la main (il écrit ou choisit une mise en situation) : la lecture s'arrête, le texte reste lisible.
+function interruptDemo() { endDemo("Démonstration interrompue. Envoyez votre message pour commencer votre propre conversation."); }
+function exitDemo() {
+  clearDemoTimer();
+  closeDemoPicker(false);
+  demo.state = "off"; demo.scenario = null; demo.steps = []; demo.index = 0;
+  announceDemo("");
+  renderDemoControls();
+  drawWelcome();
+}
+function startDemo(id) {
+  if (pending) return;
+  const scenario = demoScenarios.find(item => item.id === id) || demoScenarios[0];
+  clearDemoTimer();
+  closeDemoPicker(false);
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  messages = [];
+  demo.scenario = scenario;
+  demo.steps = scenario.turns.flatMap(turn => [{ role:"user", text:turn.user }, { role:"assistant", text:turn.bob, links:turn.links || [] }]);
+  demo.index = 0;
+  demo.state = "playing";
+  $("#chat-stream").replaceChildren();
+  $("#demo-title").textContent = "Scénario : " + scenario.title;
+  renderDemoControls();
+  announceDemo("Démonstration lancée : " + scenario.title + ". " + scenario.turns.length + " échanges préparés à l'avance, aucune IA n'est utilisée.");
+  $(".conversation-panel").scrollIntoView({ block:"start", behavior:"instant" });
+  $("#demo-next").focus({ preventScroll:true });
+  if (reduceMotion()) advanceDemo(); else scheduleDemo();
+}
+function renderDemoControls() {
+  const active = demo.state !== "off";
+  const running = demoRunning();
+  const manual = reduceMotion();
+  const controls = $("#demo-controls");
+  const hadFocus = controls.contains(document.activeElement);
+  $(".conversation-panel").classList.toggle("is-demo", active);
+  $("#demo-banner").hidden = !active || !$("#demo-picker").hidden;
+  $("#demo-open").hidden = active;
+  controls.hidden = !active;
+  if (!active) return;
+  const total = demo.scenario.turns.length;
+  const turn = Math.min(total, Math.max(1, Math.ceil(demo.index / 2)));
+  $("#demo-progress").textContent = running
+    ? (demo.state === "paused" ? "En pause · " : "") + "Échange " + turn + " sur " + total
+    : demo.note;
+  $("#demo-pause").hidden = !running || manual;
+  $("#demo-pause span").textContent = demo.state === "paused" ? "Reprendre" : "Pause";
+  $("#demo-pause use").setAttribute("href", demo.state === "paused" ? "#i-play" : "#i-pause");
+  $("#demo-next").hidden = !running;
+  $("#demo-next").textContent = manual ? "Afficher la suite" : "Passer à la suite";
+  $("#demo-next").className = manual ? "primary-button" : "quiet-button";
+  $("#demo-all").hidden = !running;
+  $("#demo-stop").hidden = !running;
+  $("#demo-replay").hidden = running;
+  $("#demo-following").hidden = running;
+  $("#demo-quit").hidden = running;
+  // Un bouton qui disparaît ne doit pas emporter le focus clavier.
+  if (hadFocus && !controls.contains(document.activeElement)) $("button:not([hidden])", controls).focus({ preventScroll:true });
+}
+function openDemoPicker(opener) {
+  pauseDemo();
+  $("#demo-picker").hidden = false;
+  $("#demo-banner").hidden = true;
+  demo.opener = opener;
+  $("#demo-open").setAttribute("aria-expanded", "true");
+  $("#demo-change").setAttribute("aria-expanded", "true");
+  $(".demo-choice").focus();
+}
+function closeDemoPicker(returnFocus = true) {
+  const picker = $("#demo-picker");
+  if (picker.hidden) return;
+  picker.hidden = true;
+  $("#demo-banner").hidden = demo.state === "off";
+  $("#demo-open").setAttribute("aria-expanded", "false");
+  $("#demo-change").setAttribute("aria-expanded", "false");
+  if (returnFocus) (demo.opener && !demo.opener.hidden ? demo.opener : $("#chat-input")).focus();
+}
+function initDemo() {
+  $("#demo-choices").replaceChildren(...demoScenarios.map(scenario => {
+    const choice = node("button", null, "example-link demo-choice");
+    choice.type = "button";
+    choice.dataset.demo = scenario.id;
+    const text = node("span", null, "demo-choice-text");
+    text.append(node("strong", scenario.title), node("span", scenario.persona + " · " + scenario.turns.length + " échanges", "library-meta"), node("span", scenario.summary, "demo-choice-summary"));
+    choice.append(text, icon("i-play"));
+    return choice;
+  }));
+  for (const id of ["demo-open", "demo-change"]) $("#" + id).addEventListener("click", event => {
+    if ($("#demo-picker").hidden) openDemoPicker(event.currentTarget); else closeDemoPicker();
+  });
+  $("#demo-picker-close").addEventListener("click", () => closeDemoPicker());
+  $("#demo-picker").addEventListener("keydown", event => { if (event.key === "Escape") { event.stopPropagation(); closeDemoPicker(); } });
+  $("#demo-pause").addEventListener("click", () => demo.state === "paused" ? resumeDemo() : pauseDemo());
+  $("#demo-next").addEventListener("click", advanceDemo);
+  $("#demo-all").addEventListener("click", showAllDemo);
+  $("#demo-stop").addEventListener("click", () => endDemo("Démonstration arrêtée."));
+  $("#demo-replay").addEventListener("click", () => startDemo(demo.scenario.id));
+  $("#demo-following").addEventListener("click", () => {
+    const index = demoScenarios.indexOf(demo.scenario);
+    startDemo(demoScenarios[(index + 1) % demoScenarios.length].id);
+  });
+  $("#demo-quit").addEventListener("click", () => { exitDemo(); $("#demo-open").focus(); });
+  $("#chat-input").addEventListener("input", interruptDemo);
+}
 async function submitQuestion() {
   if (pending) return;
   const input = $("#chat-input");
@@ -201,6 +421,8 @@ async function submitQuestion() {
     return;
   }
   input.value = "";
+  // Une démonstration affichée ne se mélange jamais à une vraie conversation.
+  if (demo.state !== "off") exitDemo();
   messages.push({ role:"user", content:question });
   addMessage("user", question);
   pending = true;
@@ -256,6 +478,7 @@ function applySettings() {
   root.classList.toggle("high-contrast", controls.contrast);
   root.classList.toggle("reduce-motion", controls.motion);
   root.classList.toggle("simple-mode", controls.simple);
+  if (demo.state === "playing") { scheduleDemo(true); renderDemoControls(); }
   try { localStorage.setItem("neuro-bob-display", JSON.stringify(controls)); } catch {}
 }
 
@@ -374,6 +597,7 @@ function markModuleSeen(a) {
 function openEditorial(id, push = false) {
   const a = editorialArticles.find(item => item.id === id);
   if (!a) return;
+  pauseDemo();
   currentArticle = a;
   markModuleSeen(a);
   $("#editorial-title").textContent = a.title;
@@ -431,6 +655,7 @@ function initialize() {
   $("#setting-simple").checked = preferences.simple;
   applySettings();
   drawWelcome();
+  initDemo();
   renderLibrary();
   renderFeatured();
   renderParcours();
@@ -456,6 +681,8 @@ function initialize() {
   });
 
   document.addEventListener("click", event => {
+    const demoLink = event.target.closest("[data-demo]");
+    if (demoLink) { if (view !== "bob") navigate("bob", { focus:false }); startDemo(demoLink.dataset.demo); return; }
     const article = event.target.closest("[data-article]");
     if (article) { openEditorial(article.dataset.article); return; }
     const library = event.target.closest("[data-library]");
@@ -479,7 +706,7 @@ function initialize() {
   });
   $("#reset-chat").addEventListener("click", () => {
     if (pending) return;
-    messages = []; drawWelcome(); $("#chat-input").value = ""; $("#chat-input").focus();
+    messages = []; exitDemo(); $("#chat-input").value = ""; $("#chat-input").focus();
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   });
   $("#select-demo").addEventListener("click", () => { if (!pending) switchMode("demo"); });
