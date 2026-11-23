@@ -1,0 +1,9 @@
+{
+  "name": "Neuro Bob+",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+  "forwardPorts": [8787],
+  "portsAttributes": {
+    "8787": { "label": "Neuro Bob+", "onAutoForward": "openBrowser", "visibility": "private" }
+  }
+}

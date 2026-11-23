@@ -72,6 +72,15 @@ Puis ouvrir http://localhost:8080 .
 
 Les parcours, les fiches et le chat de démonstration ne nécessitent aucune API externe.
 
+**Bob avec votre abonnement Claude, depuis GitHub (Codespaces, rien à installer) :**
+
+1. Sur la page du dépôt GitHub : bouton vert **Code** → onglet **Codespaces** → **Create codespace**. Patienter une à deux minutes.
+2. Dans le terminal en bas de l'écran, taper `claude`, puis suivre la connexion à votre compte Claude. Quitter ensuite avec `/exit`.
+3. Taper `npm run bob`. Un onglet « Neuro Bob+ » s'ouvre (sinon : onglet **Ports**, ligne 8787, icône globe).
+4. Dans « S'entraîner avec Bob », choisir « IA en ligne » et cocher l'accord.
+
+Le port reste privé : seul votre compte GitHub peut ouvrir la page. Arrêter le Codespace après usage (menu Codespaces → Stop) pour ne pas consommer votre quota gratuit.
+
 **Mode local personnel (avec votre abonnement Claude) :** pour faire tourner Bob pour vous seul, sur votre machine, sans clé API.
 
 1. Installer Claude Code et s'y connecter avec votre compte (`claude`, puis `/login`).
